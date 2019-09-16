@@ -1,10 +1,10 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import Button from '../../../styles/components/Buttons';
-import { Container, SignForm, SignInInput } from '../styles';
-import AuthActions from '../../../store/ducks/auth';
-import { signIn } from '../../../store/sagas/auth';
+import React from "react";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import Button from "../../../styles/components/Buttons";
+import { Container, SignForm, SignInInput } from "../styles";
+import AuthActions from "../../../store/ducks/auth";
+import { signIn } from "../../../store/sagas/auth";
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function SignIn() {
 }
 
 signIn.propTypes = {
-  signInRequest: PropTypes.func.isRequired,
+  signInRequest: PropTypes.func.isRequired
 };
 
 export default SignIn;

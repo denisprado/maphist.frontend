@@ -4,27 +4,25 @@ import Immutable from "seamless-immutable";
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  signInRequest: ["email", "password"],
-  signInSuccess: ["token"]
+  getTeamsRequest: null,
+  getTeamsSuccess: ["data"]
 });
 
-export const AuthTypes = Types;
+export const TeamTypes = Types;
 export default Creators;
 
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  signedIn: !!localStorage.getItem("@maphist:token"),
-  token: localStorage.getItem("@maphist:token") || null
+  data: []
 });
 
 /* Reducers */
 
-export const success = (state, { token }) =>
-  state.merge({ signedIn: true, token });
+export const getSuccess = (state, { data }) => state.merge({ data });
 
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SIGN_IN_SUCCESS]: success
+  [Types.GET_TEAMS_SUCCESS]: getSuccess
 });

@@ -1,7 +1,14 @@
-import React from 'react';
+import React from "react";
+import TeamSwitcher from "../../components/TeamSwitcher";
 
-// import { Container } from './styles';
+import { Container } from "./styles";
 
-const Main = () => <div />;
+function Main() {
+  return (
+    <Container>
+      <TeamSwitcher />
+    </Container>
+  );
+}
 
 export default Main;
