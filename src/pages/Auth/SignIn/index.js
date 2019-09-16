@@ -1,24 +1,39 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from '../../../styles/components/Buttons';
+import { Container, SignForm, SignInInput } from '../styles';
+import AuthActions from '../../../store/ducks/auth';
+import { signIn } from '../../../store/sagas/auth';
 
-import { Container, SignForm } from '../styles';
+function SignIn() {
+  const dispatch = useDispatch();
 
-const SignIn = () => (
-  <Container>
-    <SignForm onSubmit={() => {}}>
-      <h1>Boas vindas</h1>
+  function handleSubmit(data) {
+    dispatch(AuthActions.signInRequest(data.email, data.password));
+  }
 
-      <span>E-mail</span>
-      <input type="email" name="email" value="" />
+  return (
+    <Container>
+      <SignForm onSubmit={handleSubmit}>
+        <h1>Boas vindas</h1>
 
-      <span>Senha</span>
-      <input type="password" name="password" />
+        <span>E-mail</span>
+        <SignInInput type="email" name="email" />
 
-      <Button size="big" type="submit">
-        Entrar
-      </Button>
-    </SignForm>
-  </Container>
-);
+        <span>Senha</span>
+        <SignInInput type="password" name="password" />
+
+        <Button size="big" type="submit">
+          Entrar
+        </Button>
+      </SignForm>
+    </Container>
+  );
+}
+
+signIn.propTypes = {
+  signInRequest: PropTypes.func.isRequired,
+};
 
 export default SignIn;

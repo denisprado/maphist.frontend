@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Form, Input } from '@rocketseat/unform';
 
 export const Container = styled.div`
   flex: 1;
@@ -9,7 +10,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const SignForm = styled.form`
+export const SignForm = styled(Form)`
   background: #36393f;
   border-radius: 5px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
@@ -33,24 +34,24 @@ export const SignForm = styled.form`
     font-weight: 600;
     margin-top: 15px;
   }
+`;
 
-  input {
-    height: 40px;
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    background-color: 1px solid rgba(0, 0, 0, 0.1);
-    color: #f6f6f6;
-    margin-top: 8px;
-    transition: border 0.15 ease;
-    font-size: 16px;
+export const SignInInput = styled(Input)`
+  height: 40px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #f6f6f6;
+  margin-top: 8px;
+  transition: border 0.15 ease;
+  font-size: 16px;
 
-    &:focus {
-      border-color: #7289da;
-    }
+  &:focus {
+    border-color: #7289da;
+  }
 
-    button {
-      margin: 20px 0 0;
-    }
+  button {
+    margin: 20px 0 0;
   }
 `;
