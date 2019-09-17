@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Form, Input } from '@rocketseat/unform';
 
 export const Container = styled.div`
   position: fixed;
@@ -12,6 +13,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export const Content = styled.div`
   background: #36393f;
   border-radius: 5px;
@@ -25,36 +27,55 @@ export const Content = styled.div`
     text-align: center;
     margin: 0 0 10px;
   }
+`;
 
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+export const ModalForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 
-    > span {
-      color: #b9bbbe;
-      font-size: 14px;
-      line-height: 16px;
-      font-weight: 600;
-      margin-top: 15px;
-    }
-    > input {
-      height: 40px;
-      padding: 10px;
-      border-radius: 3px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      background-color: rgba(0, 0, 0, 0.1);
-      color: #f6f6f6;
-      margin-top: 8px;
-      transition: border 0.15 ease;
-      font-size: 16px;
+  > span {
+    color: #b9bbbe;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 600;
+    margin-top: 15px;
+  }
+  > input {
+    height: 40px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #f6f6f6;
+    margin-top: 8px;
+    transition: border 0.15 ease;
+    font-size: 16px;
 
-      &:focus {
-        border-color: #7289da;
-      }
-    }
-    > button {
-      margin: 20px 0 0;
+    &:focus {
+      border-color: #7289da;
     }
   }
+  > button {
+    margin: 20px 0 0;
+  }
+`;
+
+export const ModalInput = styled(Input)`
+  input {
+    height: 40px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #f6f6f6;
+    margin-top: 8px;
+    transition: border 0.15 ease;
+    font-size: 16px;
+
+    &:focus {
+      border-color: #7289da;
+    }
+  }
+}
 `;
