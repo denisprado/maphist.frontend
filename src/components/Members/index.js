@@ -1,15 +1,36 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import MembersActions from '../../store/ducks/members';
-import Button from '../../styles/components/Buttons';
-import Modal from '../Modal';
-import { ModalForm } from '../Modal/styles';
-import { MembersList } from './styles';
+/* eslint-disable linebreak-style */
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Select from "react-select";
+import MembersActions from "../../store/ducks/members";
+import Button from "../../styles/components/Buttons";
+import Modal from "../Modal";
+import { ModalForm, ModalInput } from "../Modal/styles";
+import { MembersList } from "./styles";
+import api from "../../services/api";
 
 function Members() {
   const dispatch = useDispatch();
-  const members = useSelector((state) => state.members);
+  const members = useSelector(state => state.members);
+
+  const [roles, setRoles] = useState([]);
+
+  async function getRoles() {
+    const response = await api.get("roles");
+    return setRoles(response.data);
+  }
+
+  const handleRolesChange = (id, newRoles) => {
+    dispatch(MembersActions.updateMemberRequest(id, newRoles));
+  };
+
+  const handleInviteSubmit = ({ invite }) => {
+    dispatch(MembersActions.inviteMemberRequest(invite));
+  };
+
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   useEffect(() => {
     dispatch(MembersActions.getMembersRequest());
@@ -19,11 +40,24 @@ function Members() {
     <Modal size="big">
       <h1>Membros</h1>
 
+      <ModalForm onSubmit={handleInviteSubmit}>
+        <ModalInput name="invite" placeholder="Convidar para o time" />
+        <Button type="submit">Enviar</Button>
+      </ModalForm>
+
       <ModalForm>
         <MembersList>
-          {members.data.map((member) => (
+          {members.data.map(member => (
             <li key={member.id}>
               <strong>{member.user.name}</strong>
+              <Select
+                isMulti
+                options={roles}
+                getOptionLabel={role => role.name}
+                getOptionValue={role => role.id}
+                value={member.roles}
+                onChange={value => handleRolesChange(member.id, value)}
+              />
             </li>
           ))}
         </MembersList>
@@ -38,10 +72,5 @@ function Members() {
     </Modal>
   );
 }
-
-Members.propTypes = {
-  closeMembersModal: PropTypes.func.isRequired,
-  getMembersRequest: PropTypes.func.isRequired,
-};
 
 export default Members;

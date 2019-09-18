@@ -1,18 +1,17 @@
-import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import MembersActions from '../../store/ducks/members';
-import ProjectsActions from '../../store/ducks/projects';
-import Button from '../../styles/components/Buttons';
-import Members from '../Members';
-import Modal from '../Modal';
-import { ModalForm, ModalInput } from '../Modal/styles';
-import { Container, Project } from './styles';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import MembersActions from "../../store/ducks/members";
+import ProjectsActions from "../../store/ducks/projects";
+import Button from "../../styles/components/Buttons";
+import Members from "../Members";
+import Modal from "../Modal";
+import { ModalForm, ModalInput } from "../Modal/styles";
+import { Container, Project } from "./styles";
 
 function Projects() {
-  const projects = useSelector((state) => state.projects);
-  const members = useSelector((state) => state.members);
-  const activeTeam = useSelector((state) => state.teams.active);
+  const projects = useSelector(state => state.projects);
+  const members = useSelector(state => state.members);
+  const activeTeam = useSelector(state => state.teams.active);
 
   const dispatch = useDispatch();
 
@@ -20,7 +19,7 @@ function Projects() {
     dispatch(ProjectsActions.openProjectModal());
   };
 
-  const handleNewProjectSubmit = (data) => {
+  const handleNewProjectSubmit = data => {
     dispatch(ProjectsActions.createProjectRequest(data.name));
   };
 
@@ -42,7 +41,7 @@ function Projects() {
         </div>
       </header>
 
-      {projects.data.map((project) => (
+      {projects.data.map(project => (
         <Project key={project.id}>
           <p>{project.title}</p>
         </Project>
@@ -75,24 +74,5 @@ function Projects() {
     </Container>
   );
 }
-
-Projects.propTypes = {
-  openMembersModal: PropTypes.func.isRequired,
-  openProjectModal: PropTypes.func.isRequired,
-  closeProjectModal: PropTypes.func.isRequired,
-  createProjectRequest: PropTypes.func.isRequired,
-  activeTeam: PropTypes.shape({
-    name: PropTypes.string,
-  }).isRequired,
-  projects: PropTypes.shape({
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-      }),
-    ),
-    projectModalOpen: PropTypes.bool,
-  }),
-};
 
 export default Projects;
