@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -13,11 +13,12 @@ import Button from '../../styles/components/Buttons';
 
 function TeamSwitcher() {
   const teams = useSelector((state) => state.teams);
+  const projects = useSelector((state) => state.projects);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getTeams = useEffect(() => {
     dispatch(TeamActions.getTeamsRequest());
-  }, []);
+  }, [dispatch]);
 
   const handleTeamSelect = (team) => {
     dispatch(TeamActions.selectTeam(team));

@@ -13,7 +13,7 @@ function Members() {
 
   useEffect(() => {
     dispatch(MembersActions.getMembersRequest());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Modal size="big">

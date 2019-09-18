@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
@@ -16,10 +16,6 @@ function Projects() {
 
   const dispatch = useDispatch();
 
-  const listProjects = () => {
-    dispatch(ProjectsActions.getProjectsRequest());
-  };
-
   const handleOpenModal = () => {
     dispatch(ProjectsActions.openProjectModal());
   };
@@ -27,10 +23,6 @@ function Projects() {
   const handleNewProjectSubmit = (data) => {
     dispatch(ProjectsActions.createProjectRequest(data.name));
   };
-
-  useEffect(() => {
-    listProjects();
-  }, [activeTeam]);
 
   if (!activeTeam) return null;
 

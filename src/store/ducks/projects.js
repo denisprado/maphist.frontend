@@ -30,6 +30,7 @@ export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
 export const createSuccess = (state, { project }) =>
   state.merge({ data: [...state.data, project] });
+
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {

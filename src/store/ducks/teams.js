@@ -27,7 +27,7 @@ export const INITIAL_STATE = Immutable({
 /* Reducers */
 
 export const getSuccess = (state, { data }) => state.merge({ data });
-export const selectTeam = (state, { team }) => {
+export const selectAtualTeam = (state, { team }) => {
   localStorage.setItem('@maphist:team', JSON.stringify(team));
   return state.merge({ active: team });
 };
@@ -40,7 +40,7 @@ export const createSuccess = (state, { team }) =>
 /* Reducers to types */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_TEAMS_SUCCESS]: getSuccess,
-  [Types.SELECT_TEAM]: selectTeam,
+  [Types.SELECT_TEAM]: selectAtualTeam,
   [Types.OPEN_TEAM_MODAL]: openModal,
   [Types.CLOSE_TEAM_MODAL]: closeModal,
   [Types.CREATE_TEAM_SUCCESS]: createSuccess,
