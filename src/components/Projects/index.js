@@ -1,17 +1,18 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import MembersActions from "../../store/ducks/members";
-import ProjectsActions from "../../store/ducks/projects";
-import Button from "../../styles/components/Buttons";
-import Members from "../Members";
-import Modal from "../Modal";
-import { ModalForm, ModalInput } from "../Modal/styles";
-import { Container, Project } from "./styles";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import MembersActions from '../../store/ducks/members';
+import ProjectsActions from '../../store/ducks/projects';
+import Button from '../../styles/components/Buttons';
+import Members from '../Members';
+import Modal from '../Modal';
+import { ModalForm, ModalInput } from '../Modal/styles';
+import { Container, Project } from './styles';
+import Can from '../Can';
 
 function Projects() {
-  const projects = useSelector(state => state.projects);
-  const members = useSelector(state => state.members);
-  const activeTeam = useSelector(state => state.teams.active);
+  const projects = useSelector((state) => state.projects);
+  const members = useSelector((state) => state.members);
+  const activeTeam = useSelector((state) => state.teams.active);
 
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ function Projects() {
     dispatch(ProjectsActions.openProjectModal());
   };
 
-  const handleNewProjectSubmit = data => {
+  const handleNewProjectSubmit = (data) => {
     dispatch(ProjectsActions.createProjectRequest(data.name));
   };
 
@@ -30,7 +31,9 @@ function Projects() {
       <header>
         <h1>{activeTeam.name}</h1>
         <div>
-          <Button onClick={handleOpenModal}>+ Novo</Button>
+          <Can checkPermission="projects_create">
+            <Button onClick={handleOpenModal}>+ Novo</Button>
+          </Can>
           <Button
             onClick={() => {
               dispatch(MembersActions.openMembersModal());
@@ -41,7 +44,7 @@ function Projects() {
         </div>
       </header>
 
-      {projects.data.map(project => (
+      {projects.data.map((project) => (
         <Project key={project.id}>
           <p>{project.title}</p>
         </Project>
@@ -53,6 +56,15 @@ function Projects() {
           <ModalForm onSubmit={handleNewProjectSubmit}>
             <span>NOME</span>
             <ModalInput name="name" />
+
+            <span>Latitude</span>
+            <ModalInput name="lat" />
+
+            <span>Longitude</span>
+            <ModalInput name="lat" />
+
+            <span>Description</span>
+            <ModalInput multiline rows="5" name="description" />
 
             <Button size="big" type="submit">
               Salvar

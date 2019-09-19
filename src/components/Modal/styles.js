@@ -61,7 +61,10 @@ export const ModalForm = styled(Form)`
   }
 `;
 
-export const ModalInput = styled(Input)`
+export const ModalInput = styled(Input).attrs({
+  multiline: (props) => props.multiline && 'multiline',
+  rows: (props) => props.rows && `rows=${props.rows}`,
+})`
   input {
     height: 40px;
     padding: 10px;
