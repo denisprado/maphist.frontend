@@ -9,6 +9,11 @@ export function* getProjects() {
   yield put(ProjectsActions.getProjectsSuccess(response.data));
 }
 
+export function* getProject({ id }) {
+  const response = yield call(api.get, `projects/${id}`);
+  yield put(ProjectsActions.getProjectSuccess(response.data));
+}
+
 export function* createProject({ title }) {
   try {
     const response = yield call(api.post, 'projects', { title });

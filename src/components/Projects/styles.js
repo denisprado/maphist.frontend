@@ -22,13 +22,23 @@ export const Container = styled.div`
   }
 `;
 
-export const Project = styled.div`
+export const Project = styled.button`
+  flex: 1;
+  flex-direction: column;
+  flex-flow: column-nowrap;
+  width: 100%;
+  border: none;
+  display: flex;
+  flex-grow: 1;
   background: rgba(0, 0, 0, 0.2);
+  color: #fff;
   border-radius: 5px;
   margin: 0 0 20px;
   padding: 20px;
+  font-size: 18px;
+  transition: all 0.2s;
 
-  p {
-    font-size: 18px;
+  &:hover {
+    background: rgba(0, 0, 0, 0.4);
   }
 `;

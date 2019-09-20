@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
 import Button from '../../styles/components/Buttons';
+import ProjectContent from '../ProjectContent';
 import Members from '../Members';
 import Modal from '../Modal';
 import { ModalForm, ModalInput } from '../Modal/styles';
@@ -11,6 +12,7 @@ import Can from '../Can';
 
 function Projects() {
   const projects = useSelector((state) => state.projects);
+  const selectedProject = useSelector((state) => state.project);
   const members = useSelector((state) => state.members);
   const activeTeam = useSelector((state) => state.teams.active);
 
@@ -22,6 +24,11 @@ function Projects() {
 
   const handleNewProjectSubmit = (data) => {
     dispatch(ProjectsActions.createProjectRequest(data.name));
+  };
+
+  const handleSelectProject = (id) => {
+    dispatch(ProjectsActions.getProjectRequest(id));
+    console.log(selectedProject);
   };
 
   if (!activeTeam) return null;
@@ -45,8 +52,11 @@ function Projects() {
       </header>
 
       {projects.data.map((project) => (
-        <Project key={project.id}>
-          <p>{project.title}</p>
+        <Project
+          key={project.id}
+          onClick={() => handleSelectProject(project.id)}
+        >
+          {project.title}
         </Project>
       ))}
 

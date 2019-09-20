@@ -1,34 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import MembersActions from '../../store/ducks/members';
-import ProjectsActions from '../../store/ducks/projects';
-import Button from '../../styles/components/Buttons';
-import Members from '../Members';
-import Modal from '../Modal';
-import { ModalForm, ModalInput } from '../Modal/styles';
-import { Container, ProjectContent } from './styles';
-import Can from '../Can';
+import { useSelector } from 'react-redux';
+import { Container } from './styles';
 
-function Projects() {
-  const projects = useSelector((state) => state.projects);
-  const activeTeam = useSelector((state) => state.teams.active);
-
-  const dispatch = useDispatch();
-
-  if (!activeTeam) return null;
+function ProjectContent() {
+  const project = useSelector((state) => state.project);
 
   return (
-    <Container>
-      {projects.data.map((project) => (
-        <ProjectContent key={project.id}>
-          <p>{project.title}</p>
-          <p>{project.description}</p>
-          <p>{project.lat}</p>
-          <p>{project.lng}</p>
-        </ProjectContent>
-      ))}
-    </Container>
+    project && (
+      <Container>
+        <p>{project.title}</p>
+        <p>{project.description}</p>
+        <p>{project.lat}</p>
+        <p>{project.lng}</p>
+      </Container>
+    )
   );
 }
 
-export default Projects;
+export default ProjectContent;
