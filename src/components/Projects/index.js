@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
 import Button from '../../styles/components/Buttons';
-import ProjectContent from '../ProjectContent';
 import Members from '../Members';
 import Modal from '../Modal';
 import { ModalForm, ModalInput } from '../Modal/styles';
@@ -12,7 +11,7 @@ import Can from '../Can';
 
 function Projects() {
   const projects = useSelector((state) => state.projects);
-  const selectedProject = useSelector((state) => state.project);
+  const selectedProject = useSelector((state) => state.projects.project);
   const members = useSelector((state) => state.members);
   const activeTeam = useSelector((state) => state.teams.active);
 
@@ -22,13 +21,16 @@ function Projects() {
     dispatch(ProjectsActions.openProjectModal());
   };
 
-  const handleNewProjectSubmit = (data) => {
-    dispatch(ProjectsActions.createProjectRequest(data.name));
+  const handleNewProjectSubmit = ({
+ title, description, lat, lng 
+}) => {
+    dispatch(
+      ProjectsActions.createProjectRequest(title, description, lat, lng),
+    );
   };
 
   const handleSelectProject = (id) => {
     dispatch(ProjectsActions.getProjectRequest(id));
-    console.log(selectedProject);
   };
 
   if (!activeTeam) return null;
@@ -55,6 +57,7 @@ function Projects() {
         <Project
           key={project.id}
           onClick={() => handleSelectProject(project.id)}
+          active={selectedProject.id === project.id ? 'active' : null}
         >
           {project.title}
         </Project>
@@ -64,14 +67,14 @@ function Projects() {
         <Modal>
           <h1>Criar projeto</h1>
           <ModalForm onSubmit={handleNewProjectSubmit}>
-            <span>NOME</span>
-            <ModalInput name="name" />
+            <span>Nome</span>
+            <ModalInput name="title" />
 
             <span>Latitude</span>
             <ModalInput name="lat" />
 
             <span>Longitude</span>
-            <ModalInput name="lat" />
+            <ModalInput name="lng" />
 
             <span>Description</span>
             <ModalInput multiline rows="5" name="description" />

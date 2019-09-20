@@ -14,9 +14,16 @@ export function* getProject({ id }) {
   yield put(ProjectsActions.getProjectSuccess(response.data));
 }
 
-export function* createProject({ title }) {
+export function* createProject({
+ title, description, lat, lng 
+}) {
   try {
-    const response = yield call(api.post, 'projects', { title });
+    const response = yield call(api.post, 'projects', {
+      title,
+      description,
+      lat,
+      lng,
+    });
     yield put(ProjectsActions.createProjectSuccess(response.data));
     yield put(ProjectsActions.closeProjectModal());
   } catch (err) {

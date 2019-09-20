@@ -7,10 +7,10 @@ const { Types, Creators } = createActions({
   getProjectsRequest: null,
   getProjectsSuccess: ['data'],
   getProjectRequest: ['id'],
-  getProjectSuccess: ['data'],
+  getProjectSuccess: ['project'],
   openProjectModal: null,
   closeProjectModal: null,
-  createProjectRequest: ['title'],
+  createProjectRequest: ['title', 'description', 'lat', 'lng'],
   createProjectSuccess: ['project'],
 });
 
@@ -28,11 +28,15 @@ export const INITIAL_STATE = Immutable({
 /* Reducers */
 
 export const success = (state, { data }) => state.merge({ data });
-export const showProject = (state, { data }) => state.merge({ project: data });
+export const showProject = (state, { project }) => {
+  console.log([project]);
+  return state.merge({ project });
+};
 export const logout = (state) => state.merge({ signedIn: false, token: null });
 export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
-export const createSuccess = (state, { project }) => state.merge({ data: [...state.data, project] });
+export const createSuccess = (state, { project }) =>
+  state.merge({ data: [...state.data, project] });
 
 /* Reducers to types */
 

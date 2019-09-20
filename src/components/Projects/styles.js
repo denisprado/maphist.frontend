@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   flex: 1;
   padding: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  min-width: 25%;
   > header {
     display: flex;
     align-items: center;
@@ -30,7 +31,8 @@ export const Project = styled.button`
   border: none;
   display: flex;
   flex-grow: 1;
-  background: rgba(0, 0, 0, 0.2);
+  background: ${(props) =>
+    (props.active ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)")};
   color: #fff;
   border-radius: 5px;
   margin: 0 0 20px;
