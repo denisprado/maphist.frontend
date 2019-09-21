@@ -9,13 +9,13 @@ export function* getProjects() {
   yield put(ProjectsActions.getProjectsSuccess(response.data));
 }
 
-export function* getProject({ id }) {
-  const response = yield call(api.get, `projects/${id}`);
-  yield put(ProjectsActions.getProjectSuccess(response.data));
-}
-
 export function* createProject({
- title, description, lat, lng 
+  title,
+  description,
+  lat,
+  lng,
+  startYear,
+  endYear,
 }) {
   try {
     const response = yield call(api.post, 'projects', {
@@ -23,6 +23,8 @@ export function* createProject({
       description,
       lat,
       lng,
+      start_year: startYear,
+      end_year: endYear,
     });
     yield put(ProjectsActions.createProjectSuccess(response.data));
     yield put(ProjectsActions.closeProjectModal());

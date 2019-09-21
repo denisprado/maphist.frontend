@@ -11,7 +11,7 @@ import Can from '../Can';
 
 function Projects() {
   const projects = useSelector((state) => state.projects);
-  const selectedProject = useSelector((state) => state.projects.project);
+  const selectedProject = useSelector((state) => state.projects.active);
   const members = useSelector((state) => state.members);
   const activeTeam = useSelector((state) => state.teams.active);
 
@@ -22,15 +22,27 @@ function Projects() {
   };
 
   const handleNewProjectSubmit = ({
- title, description, lat, lng 
-}) => {
+    title,
+    description,
+    lat,
+    lng,
+    startYear,
+    endYear,
+  }) => {
     dispatch(
-      ProjectsActions.createProjectRequest(title, description, lat, lng),
+      ProjectsActions.createProjectRequest(
+        title,
+        description,
+        lat,
+        lng,
+        startYear,
+        endYear,
+      ),
     );
   };
 
-  const handleSelectProject = (id) => {
-    dispatch(ProjectsActions.getProjectRequest(id));
+  const handleSelectProject = (project) => {
+    dispatch(ProjectsActions.selectProject(project));
   };
 
   if (!activeTeam) return null;
@@ -54,17 +66,25 @@ function Projects() {
       </header>
 
       {projects.data.map((project) => (
-        <Project
-          key={project.id}
-          onClick={() => handleSelectProject(project.id)}
-          active={selectedProject.id === project.id ? 'active' : null}
-        >
-          {project.title}
-        </Project>
+        <>
+          <Project
+            key={project.id}
+            onClick={() => handleSelectProject(project)}
+            active={
+              selectedProject
+                ? selectedProject.id === project.id
+                  ? 'active'
+                  : null
+                : null
+            }
+          >
+            {project.title}
+          </Project>
+        </>
       ))}
 
       {projects.projectModalOpen && (
-        <Modal>
+        <Modal size="big">
           <h1>Criar projeto</h1>
           <ModalForm onSubmit={handleNewProjectSubmit}>
             <span>Nome</span>
@@ -75,6 +95,12 @@ function Projects() {
 
             <span>Longitude</span>
             <ModalInput name="lng" />
+
+            <span>Ano Inicial</span>
+            <ModalInput name="startYear" />
+
+            <span>Ano Final</span>
+            <ModalInput name="endYear" />
 
             <span>Description</span>
             <ModalInput multiline rows="5" name="description" />

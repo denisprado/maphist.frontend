@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import { Container, TeamList, Team, NewTeam, Logout } from "./styles";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import {
+ Container, TeamList, Team, NewTeam, Logout 
+} from './styles';
 
-import { ModalForm, ModalInput } from "../Modal/styles";
-import TeamActions from "../../store/ducks/teams";
-import AuthActions from "../../store/ducks/auth";
-import Modal from "../Modal";
-import Button from "../../styles/components/Buttons";
+import { ModalForm, ModalInput } from '../Modal/styles';
+import TeamActions from '../../store/ducks/teams';
+import AuthActions from '../../store/ducks/auth';
+import Modal from '../Modal';
+import Button from '../../styles/components/Buttons';
 
 function TeamSwitcher() {
-  const teams = useSelector(state => state.teams);
+  const teams = useSelector((state) => state.teams);
 
   const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ function TeamSwitcher() {
     dispatch(TeamActions.getTeamsRequest());
   }, [dispatch]);
 
-  const handleTeamSelect = team => {
+  const handleTeamSelect = (team) => {
     dispatch(TeamActions.selectTeam(team));
   };
 
@@ -26,7 +28,7 @@ function TeamSwitcher() {
     dispatch(TeamActions.openTeamModal());
   };
 
-  const handleNewTeamSubmit = data => {
+  const handleNewTeamSubmit = (data) => {
     dispatch(TeamActions.createTeamRequest(data.name));
   };
 
@@ -41,13 +43,13 @@ function TeamSwitcher() {
   return (
     <Container>
       <TeamList>
-        {teams.data.map(team => (
+        {teams.data.map((team) => (
           <Team key={team.id} onClick={() => handleTeamSelect(team)}>
             <img
               alt={team.name}
               src={
-                "https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=" +
-                team.name
+                'https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name='
+                + team.name
               }
             />
           </Team>
@@ -91,10 +93,10 @@ TeamSwitcher.propTypes = {
     data: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
-        name: PropTypes.string
-      })
-    )
-  })
+        name: PropTypes.string,
+      }),
+    ),
+  }),
 };
 
 export default TeamSwitcher;

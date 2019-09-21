@@ -31,11 +31,11 @@ export const Project = styled.button`
   border: none;
   display: flex;
   flex-grow: 1;
-  background: ${(props) =>
-    (props.active ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)")};
+  background: ${(props) => (props.active ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)")};
+  margin: 0 0 20px;
+  border: ${(props) => props.active && '2px solid #7159c1'};
   color: #fff;
   border-radius: 5px;
-  margin: 0 0 20px;
   padding: 20px;
   font-size: 18px;
   transition: all 0.2s;

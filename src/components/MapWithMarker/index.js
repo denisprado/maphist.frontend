@@ -5,11 +5,11 @@ import { MapContainer } from './styles';
 import Marker from '../Marker';
 
 function MapWithMarker() {
-  const p = useSelector((state) => state.projects.project);
+  const p = useSelector((state) => state.projects.active);
   const defaultMap = {
     center: {
-      lat: -22.8948443,
-      lng: -47.1711201,
+      lat: p.lat && -22.8948443,
+      lng: p.lng && -47.1711201,
     },
     zoom: 9,
   };
