@@ -12,4 +12,22 @@ export const Container = styled.div`
   * {
     margin-bottom: 20px;
   }
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
+
+export const DeleteIcon = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: #7159c1;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  margin: 0px;
+  height: 0px;
 `;

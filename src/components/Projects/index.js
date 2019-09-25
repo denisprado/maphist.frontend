@@ -89,18 +89,27 @@ function Projects() {
           <ModalForm onSubmit={handleNewProjectSubmit}>
             <span>Nome</span>
             <ModalInput name="title" />
+            <div>
+              <span>
+                Latitude
+                <ModalInput name="lat" />
+              </span>
 
-            <span>Latitude</span>
-            <ModalInput name="lat" />
-
-            <span>Longitude</span>
-            <ModalInput name="lng" />
-
-            <span>Ano Inicial</span>
-            <ModalInput name="startYear" />
-
-            <span>Ano Final</span>
-            <ModalInput name="endYear" />
+              <span>
+                Longitude
+                <ModalInput name="lng" />
+              </span>
+            </div>
+            <div>
+              <span>
+                Ano Inicial
+                <ModalInput name="startYear" />
+              </span>
+              <span>
+                Ano Final
+                <ModalInput name="endYear" />
+              </span>
+            </div>
 
             <span>Description</span>
             <ModalInput multiline rows="5" name="description" />

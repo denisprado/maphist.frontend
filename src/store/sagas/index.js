@@ -8,7 +8,7 @@ import { AuthTypes } from '../ducks/auth';
 import { getTeams, createTeam } from './teams';
 import { TeamTypes } from '../ducks/teams';
 
-import { getProjects, createProject, getProject } from './projects';
+import { getProjects, createProject, deleteProject } from './projects';
 import { ProjectsTypes } from '../ducks/projects';
 
 import { getMembers, updateMember, inviteMember } from './members';
@@ -29,6 +29,8 @@ export default function* rootSaga() {
 
     takeLatest(ProjectsTypes.GET_PROJECTS_REQUEST, getProjects),
     takeLatest(ProjectsTypes.CREATE_PROJECT_REQUEST, createProject),
+    takeLatest(ProjectsTypes.DELETE_PROJECT_REQUEST, deleteProject),
+    takeLatest(ProjectsTypes.DELETE_PROJECT_SUCCESS, getProjects),
 
     takeLatest(MembersTypes.GET_MEMBERS_REQUEST, getMembers),
     takeLatest(MembersTypes.UPDATE_MEMBER_REQUEST, updateMember),

@@ -1,44 +1,31 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Container } from "./styles";
-import MapWithMarker from "../MapWithMarker";
-
-const toCamel = s =>
-  s.replace(/([-_][a-z])/gi, $1 =>
-    $1
-      .toUpperCase()
-      .replace("-", "")
-      .replace("_", "")
-  );
-const isArray = function(a) {
-  return Array.isArray(a);
-};
-const isObject = function(o) {
-  return o === Object(o) && !isArray(o) && typeof o !== "function";
-};
-const keysToCamel = function(o) {
-  if (isObject(o)) {
-    const n = {};
-
-    Object.keys(o).forEach(k => {
-      n[toCamel(k)] = keysToCamel(o[k]);
-    });
-
-    return n;
-  }
-  if (isArray(o)) {
-    return o.map(i => keysToCamel(i));
-  }
-
-  return o;
-};
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container, DeleteIcon } from './styles';
+import ProjectActions from '../../store/ducks/projects';
+import MapWithMarker from '../MapWithMarker';
+import keysToCamel from '../../resources/helpers';
 
 function ProjectContent() {
-  const p = keysToCamel(useSelector(state => state.projects.active));
+  const dispatch = useDispatch();
+  const p = keysToCamel(useSelector((state) => state.projects.active));
+
+  const handleClickDeleteProject = (project) => {
+    dispatch(ProjectActions.deleteProjectRequest(project));
+  };
 
   return p ? (
     <Container>
-      <h1>{p.title}</h1>
+      <header>
+        <h1>{p.title}</h1>
+        <DeleteIcon>
+          <FontAwesomeIcon
+            onClick={() => handleClickDeleteProject(p)}
+            icon={faTrash}
+          />
+        </DeleteIcon>
+      </header>
       <h3>{`${p.startYear} - ${p.endYear}`}</h3>
       <MapWithMarker />
       <p>{p.description}</p>

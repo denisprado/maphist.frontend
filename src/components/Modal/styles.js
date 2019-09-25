@@ -32,30 +32,23 @@ export const Content = styled.div`
 export const ModalForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: space-around;
 
-  > span {
+  span {
+    display: flex;
+    flex-direction: column;
     color: #b9bbbe;
     font-size: 14px;
     line-height: 16px;
     font-weight: 600;
-    margin-top: 15px;
+    margin: 30px 30px 0 0;
   }
-  > input {
-    height: 40px;
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #f6f6f6;
-    margin-top: 8px;
-    transition: border 0.15 ease;
-    font-size: 16px;
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
 
-    &:focus {
-      border-color: #7289da;
-    }
-  }
   > button {
     margin: 20px 0 0;
   }
@@ -65,8 +58,8 @@ export const ModalInput = styled(Input).attrs({
   multiline: (props) => props.multiline && 'multiline',
   rows: (props) => props.rows && `rows=${props.rows}`,
 })`
-  input {
-    height: 40px;
+  display:block;
+    min-height: 40px;
     padding: 10px;
     border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -80,5 +73,5 @@ export const ModalInput = styled(Input).attrs({
       border-color: #7289da;
     }
   }
-}
+
 `;
