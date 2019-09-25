@@ -1,18 +1,19 @@
-import { all, fork, takeLatest } from 'redux-saga/effects';
+import { all, fork, takeLatest } from "redux-saga/effects";
 
-import {
- signIn, signOut, signUp, getPermissions 
-} from './auth';
-import { AuthTypes } from '../ducks/auth';
+import { signIn, signOut, signUp, getPermissions } from "./auth";
+import { AuthTypes } from "../ducks/auth";
 
-import { getTeams, createTeam } from './teams';
-import { TeamTypes } from '../ducks/teams';
+import { getTeams, createTeam } from "./teams";
+import { TeamTypes } from "../ducks/teams";
 
-import { getProjects, createProject, deleteProject } from './projects';
-import { ProjectsTypes } from '../ducks/projects';
+import { getProjects, createProject, deleteProject } from "./projects";
+import { ProjectsTypes } from "../ducks/projects";
 
-import { getMembers, updateMember, inviteMember } from './members';
-import { MembersTypes } from '../ducks/members';
+import { getMembers, updateMember, inviteMember } from "./members";
+import { MembersTypes } from "../ducks/members";
+
+import { uploadFiles } from "./files";
+import { FilesTypes } from "../ducks/files";
 
 export default function* rootSaga() {
   return yield all([
@@ -32,8 +33,10 @@ export default function* rootSaga() {
     takeLatest(ProjectsTypes.DELETE_PROJECT_REQUEST, deleteProject),
     takeLatest(ProjectsTypes.DELETE_PROJECT_SUCCESS, getProjects),
 
+    takeLatest(FilesTypes.UPLOAD_FILES_REQUEST, uploadFiles),
+
     takeLatest(MembersTypes.GET_MEMBERS_REQUEST, getMembers),
     takeLatest(MembersTypes.UPDATE_MEMBER_REQUEST, updateMember),
-    takeLatest(MembersTypes.INVITE_MEMBER_REQUEST, inviteMember),
+    takeLatest(MembersTypes.INVITE_MEMBER_REQUEST, inviteMember)
   ]);
 }
