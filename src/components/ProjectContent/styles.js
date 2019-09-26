@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../../styles/components/Buttons';
 
 export const Container = styled.div`
   display: flex;
@@ -19,15 +20,15 @@ export const Container = styled.div`
   }
 `;
 
-export const DeleteIcon = styled.button`
+export const ToolsIcon = styled(Button)`
+  margin: 0 8px 0 0;
+  svg {
+    margin-bottom: 0px;
+  }
+`;
+
+export const Tools = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
-  color: #7159c1;
-  font-weight: bold;
-  font-size: 18px;
-  border: none;
-  margin: 0px;
-  height: 0px;
 `;
