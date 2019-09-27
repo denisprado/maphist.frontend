@@ -36,6 +36,15 @@ function UploadFiles() {
         onChange={onInput}
       />
       <Button type="submit"> Enviar </Button>
+      <Button
+        onClick={() => {
+          dispatch(FilesActions.closeModalUpload());
+        }}
+        size="small"
+        color="gray"
+      >
+        Cancelar
+      </Button>
     </ModalForm>
   );
 }

@@ -1,5 +1,4 @@
 import { Form, Input } from '@rocketseat/unform';
-import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -60,43 +59,19 @@ export const ModalInput = styled(Input).attrs({
   rows: (props) => props.rows && `rows=${props.rows}`,
 })`
   display:block;
-    min-height: 40px;
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #f6f6f6;
-    margin-top: 8px;
-    transition: border 0.15 ease;
-    font-size: 16px;
-
-    &:focus {
-      border-color: #7289da;
-    }
-  }
-
-`;
-
-export const File = styled(Dropzone)`
-  border: 2px dashed #7289da;
-  width: 100%;
-  max-width: 660px;
+  min-height: 40px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #f6f6f6;
+  margin-top: 8px;
+  transition: border 0.15 ease;
   font-size: 16px;
-  color: #777777;
-  text-align: center;
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-gap: 5px;
-  background-color: #fff;
-  color: #444;
-  &.without-files {
-    display: flex;
+
+  &:focus {
+    border-color: #7289da;
   }
-  img {
-    width: 100px;
-  }
-  p {
-    margin-top: 15px;
-    border: none !important;
-  }
+}
+
 `;

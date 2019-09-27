@@ -9,12 +9,14 @@ api.interceptors.request.use((config) => {
   const { token } = store.getState().auth;
   const headers = { ...config.headers };
   const { active: team } = store.getState().teams;
-
+  const multidata = store.getState().projects.projectModalOpen;
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  headers['Content-Type'] = 'multipart/form-data;';
+  if (multidata) {
+    headers['Content-Type'] = 'multipart/form-data;';
+  }
 
   if (team) {
     headers.TEAM = team.slug;

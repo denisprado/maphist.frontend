@@ -4,8 +4,7 @@ import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
 import Button from '../../styles/components/Buttons';
 import Members from '../Members';
-import Modal from '../Modal';
-import { ModalForm, ModalInput } from '../Modal/styles';
+import ProjectCreateModal from '../ProjectCreateModal';
 import { Container, Project } from './styles';
 import Can from '../Can';
 
@@ -21,26 +20,6 @@ function Projects() {
     dispatch(ProjectsActions.openProjectModal());
   };
 
-  const handleNewProjectSubmit = ({
-    title,
-    description,
-    lat,
-    lng,
-    startYear,
-    endYear,
-  }) => {
-    dispatch(
-      ProjectsActions.createProjectRequest(
-        title,
-        description,
-        lat,
-        lng,
-        startYear,
-        endYear,
-      ),
-    );
-  };
-
   const handleSelectProject = (project) => {
     dispatch(ProjectsActions.selectProject(project));
   };
@@ -48,25 +27,25 @@ function Projects() {
   if (!activeTeam) return null;
 
   return (
-    <Container>
-      <header>
-        <h1>{activeTeam.name}</h1>
-        <div>
-          <Can checkPermission="projects_create">
-            <Button onClick={handleOpenModal}>+ Novo</Button>
-          </Can>
-          <Button
-            onClick={() => {
-              dispatch(MembersActions.openMembersModal());
-            }}
-          >
-            Membros
-          </Button>
-        </div>
-      </header>
+    <>
+      <Container>
+        <header>
+          <h1>{activeTeam.name}</h1>
+          <div>
+            <Can checkPermission="projects_create">
+              <Button onClick={handleOpenModal}>+ Novo</Button>
+            </Can>
+            <Button
+              onClick={() => {
+                dispatch(MembersActions.openMembersModal());
+              }}
+            >
+              Membros
+            </Button>
+          </div>
+        </header>
 
-      {projects.data.map((project) => (
-        <>
+        {projects.data.map((project) => (
           <Project
             key={project.id}
             onClick={() => handleSelectProject(project)}
@@ -80,58 +59,11 @@ function Projects() {
           >
             {project.title}
           </Project>
-        </>
-      ))}
-
-      {projects.projectModalOpen && (
-        <Modal size="big">
-          <h1>Criar projeto</h1>
-          <ModalForm onSubmit={handleNewProjectSubmit}>
-            <span>Nome</span>
-            <ModalInput name="title" />
-            <div>
-              <span>
-                Latitude
-                <ModalInput name="lat" />
-              </span>
-
-              <span>
-                Longitude
-                <ModalInput name="lng" />
-              </span>
-            </div>
-            <div>
-              <span>
-                Ano Inicial
-                <ModalInput name="startYear" />
-              </span>
-              <span>
-                Ano Final
-                <ModalInput name="endYear" />
-              </span>
-            </div>
-
-            <span>Description</span>
-            <ModalInput multiline rows="5" name="description" />
-
-            <Button size="big" type="submit">
-              Salvar
-            </Button>
-            <Button
-              onClick={() => {
-                dispatch(ProjectsActions.closeProjectModal());
-              }}
-              size="small"
-              color="gray"
-            >
-              Cancelar
-            </Button>
-          </ModalForm>
-        </Modal>
-      )}
-
-      {members.memberModalOpen && <Members />}
-    </Container>
+        ))}
+        <ProjectCreateModal />
+        {members.memberModalOpen && <Members />}
+      </Container>
+    </>
   );
 }
 
