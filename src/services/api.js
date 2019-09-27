@@ -14,7 +14,7 @@ api.interceptors.request.use((config) => {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  if (multidata) {
+  if (!multidata) {
     headers['Content-Type'] = 'multipart/form-data;';
   }
 
