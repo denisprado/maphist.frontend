@@ -13,6 +13,7 @@ import Modal from '../Modal';
 function ProjectContent() {
   const dispatch = useDispatch();
   const p = keysToCamel(useSelector((state) => state.projects.active));
+  console.log(p);
   const modalUploadOpen = useSelector((state) => state.files.modalUploadOpen);
 
   const handleClickDeleteProject = (project) => {

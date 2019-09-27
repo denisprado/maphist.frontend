@@ -7,14 +7,8 @@ import FilesActions from '../ducks/files';
 
 export function* uploadFiles({ data, id }) {
   try {
-    console.log(data + id);
-    const response = yield call(api.post, `projects/${id}/files`, {
-      file: data,
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    });
-    console.log('response: ' + response.data);
+    const response = yield call(api.post, `projects/${id}/files`, data);
+
     yield put(FilesActions.uploadFilesSuccess(response.data));
     yield put(FilesActions.closeModalUpload());
   } catch (err) {

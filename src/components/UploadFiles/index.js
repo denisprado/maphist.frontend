@@ -10,16 +10,20 @@ function UploadFiles() {
   const [files, setFiles] = useState([]);
 
   function onInput(e) {
-    console.log(e.target.files);
     setFiles(e.target.files);
   }
 
   function onSubmit(e) {
-    e.preventDefault();
-    // Object.values(files).map((f, index) => data.append(`file[${index}]`, f));
+    console.log(files);
+    const data = new FormData();
 
-    // console.log(data.getAll('file'));
-    dispatch(FilesActions.uploadFilesRequest(files, p.id));
+    // loop through files
+    for (let i = 0; i < files.length; i++) {
+      // get item
+      data.append('file', files[i], files[i].name);
+      // or
+    }
+    dispatch(FilesActions.uploadFilesRequest(data, p.id));
   }
 
   return (
@@ -29,7 +33,6 @@ function UploadFiles() {
         name="files[]"
         id="files"
         multiple
-        value={files}
         onChange={onInput}
       />
       <Button type="submit"> Enviar </Button>
