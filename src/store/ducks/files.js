@@ -22,10 +22,7 @@ export const INITIAL_STATE = Immutable({
 
 /* Reducers */
 
-export const uploadSuccess = (state, { data }) => {
-  console.log(data);
-  return state.merge({ data });
-};
+export const uploadSuccess = (state, { data }) => state.merge({ data });
 export const openModal = (state) => state.merge({ modalUploadOpen: true });
 export const closeModal = (state) => state.merge({ modalUploadOpen: false });
 

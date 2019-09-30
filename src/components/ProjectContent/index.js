@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { faTrash, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
+import { faPhotoVideo, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Container, ToolsIcon, Tools } from './styles';
-import ProjectActions from '../../store/ducks/projects';
-import FilesActions from '../../store/ducks/files';
-import MapWithMarker from '../MapWithMarker';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import keysToCamel from '../../resources/helpers';
-import UploadFiles from '../UploadFiles';
+import FilesActions from '../../store/ducks/files';
+import ProjectActions from '../../store/ducks/projects';
+import MapWithMarker from '../MapWithMarker';
 import Modal from '../Modal';
+import UploadFiles from '../UploadFiles';
+import { Container, Tools, ToolsIcon } from './styles';
+import ProjectContentfiles from '../ProjectContentFiles';
 
 function ProjectContent() {
   const dispatch = useDispatch();
   const p = keysToCamel(useSelector((state) => state.projects.active));
-  console.log(p);
+
   const modalUploadOpen = useSelector((state) => state.files.modalUploadOpen);
 
   const handleClickDeleteProject = (project) => {
@@ -46,8 +47,15 @@ function ProjectContent() {
         </header>
         <h3>{`${p.startYear} - ${p.endYear}`}</h3>
         <MapWithMarker />
-        <p>{p.description}</p>
-        <p>{`Lat: ${p.lat} Lng: ${p.lng}`}</p>
+        <div>
+          <div>
+            <p>{p.description}</p>
+            <p>{`Lat: ${p.lat} Lng: ${p.lng}`}</p>
+          </div>
+          <div>
+            <ProjectContentfiles />
+          </div>
+        </div>
       </Container>
       {modalUploadOpen ? (
         <Modal>

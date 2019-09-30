@@ -39,7 +39,7 @@ export const INITIAL_STATE = Immutable({
 export const getSuccess = (state, { data }) => state.merge({ data });
 export const deleteSuccess = (state, { id }) => {
   localStorage.removeItem('@maphist:project');
-  console.log('Projeto deleteado:' + id);
+
   return state.merge({
     data: [...state.data.filter((proj) => proj.id !== id)],
     active: null,
@@ -53,8 +53,7 @@ export const showProject = (state, { project }) => {
 export const logout = (state) => state.merge({ signedIn: false, token: null });
 export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
-export const createSuccess = (state, { project }) =>
-  state.merge({ data: [...state.data, project] });
+export const createSuccess = (state, { project }) => state.merge({ data: [...state.data, project] });
 
 /* Reducers to types */
 

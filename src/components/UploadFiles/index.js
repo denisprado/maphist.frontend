@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FilesActions from '../../store/ducks/files';
+import ProjectActions from '../../store/ducks/projects';
 import Button from '../../styles/components/Buttons';
 import { ModalForm } from '../Modal/styles';
 
@@ -14,7 +15,6 @@ function UploadFiles() {
   }
 
   function onSubmit(e) {
-    console.log(files);
     const data = new FormData();
 
     // loop through files
