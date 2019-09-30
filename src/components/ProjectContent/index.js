@@ -8,7 +8,16 @@ import ProjectActions from '../../store/ducks/projects';
 import MapWithMarker from '../MapWithMarker';
 import Modal from '../Modal';
 import UploadFiles from '../UploadFiles';
-import { Container, Tools, ToolsIcon } from './styles';
+import ProjectContentDescription from '../ProjectContentDescription';
+
+import {
+  Container,
+  Tools,
+  ToolsIcon,
+  ProjectHeader,
+  ProjectBody,
+  ProjectContentMapAndDescription,
+} from './styles';
 import ProjectContentfiles from '../ProjectContentFiles';
 
 function ProjectContent() {
@@ -28,8 +37,11 @@ function ProjectContent() {
   return p ? (
     <>
       <Container>
-        <header>
-          <h1>{p.title}</h1>
+        <ProjectHeader>
+          <div>
+            <h1>{p.title}</h1>
+            <h3>{`${p.startYear} - ${p.endYear}`}</h3>
+          </div>
           <Tools>
             <ToolsIcon>
               <FontAwesomeIcon
@@ -44,18 +56,15 @@ function ProjectContent() {
               />
             </ToolsIcon>
           </Tools>
-        </header>
-        <h3>{`${p.startYear} - ${p.endYear}`}</h3>
-        <MapWithMarker />
-        <div>
-          <div>
-            <p>{p.description}</p>
-            <p>{`Lat: ${p.lat} Lng: ${p.lng}`}</p>
-          </div>
-          <div>
-            <ProjectContentfiles />
-          </div>
-        </div>
+        </ProjectHeader>
+        <ProjectBody>
+          <ProjectContentMapAndDescription>
+            <MapWithMarker />
+
+            <ProjectContentDescription />
+          </ProjectContentMapAndDescription>
+          <ProjectContentfiles />
+        </ProjectBody>
       </Container>
       {modalUploadOpen ? (
         <Modal>

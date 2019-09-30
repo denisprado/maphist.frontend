@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  align-content: flex-start;
+  justify-itens: space-between;
+  min-width: 265px;
 `;
 
 export const Thumb = styled.button`

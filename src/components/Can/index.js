@@ -1,5 +1,4 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 function checkAuth({ roles, permissions }, checkRole, checkPermission) {
   // Se existe a regra e não está incluída nas permissões do usuário
@@ -11,9 +10,9 @@ function checkAuth({ roles, permissions }, checkRole, checkPermission) {
 }
 
 function Can({ children, checkRole, checkPermission }) {
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector(state => state.auth);
 
-  return typeof children === 'function'
+  return typeof children === "function"
     ? children(checkAuth(auth, checkRole, checkPermission))
     : checkAuth(auth, checkRole, checkPermission) && children;
 }

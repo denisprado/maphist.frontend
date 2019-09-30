@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import FilesActions from '../../store/ducks/files';
-import ProjectActions from '../../store/ducks/projects';
-import Button from '../../styles/components/Buttons';
-import { ModalForm } from '../Modal/styles';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FilesActions from "../../store/ducks/files";
+import Button from "../../styles/components/Buttons";
+import { ModalForm } from "../Modal/styles";
 
 function UploadFiles() {
   const dispatch = useDispatch();
-  const p = useSelector((state) => state.projects.active);
+  const p = useSelector(state => state.projects.active);
   const [files, setFiles] = useState([]);
 
   function onInput(e) {
@@ -20,7 +19,7 @@ function UploadFiles() {
     // loop through files
     for (let i = 0; i < files.length; i++) {
       // get item
-      data.append('file', files[i], files[i].name);
+      data.append("file", files[i], files[i].name);
       // or
     }
     dispatch(FilesActions.uploadFilesRequest(data, p.id));

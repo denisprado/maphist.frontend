@@ -1,10 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { actions as toastrActions } from 'react-redux-toastr';
-import { push } from 'connected-react-router';
 import api from '../../services/api';
-
 import FilesActions from '../ducks/files';
-import ProjectsActions from '../ducks/projects';
 
 export function* uploadFiles({ data, id }) {
   try {
