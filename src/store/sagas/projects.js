@@ -10,6 +10,13 @@ export function* getProjects() {
   yield put(ProjectsActions.getProjectsSuccess(response.data));
 }
 
+export function* updateProject() {
+  const { id } = JSON.parse(localStorage.getItem('@maphist:project'));
+  const response = yield call(api.get, `projects/${id}`);
+
+  yield put(ProjectsActions.updateProjectSuccess(response.data));
+}
+
 export function* createProject({
   title,
   description,
