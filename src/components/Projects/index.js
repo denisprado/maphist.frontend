@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
 import Button from '../../styles/components/Buttons';
+
 import Members from '../Members';
 import ProjectCreateModal from '../ProjectCreateModal';
 import { Container, Project } from './styles';
