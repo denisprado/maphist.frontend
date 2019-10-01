@@ -18,8 +18,9 @@ export const Content = styled.div`
   background: #36393f;
   border-radius: 5px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
-  padding: 40px;
-  width: ${(props) => (props.size === "big" ? 600 : props.size === "slide" ? 1024 : 400)}px;
+  padding: 20px;
+  width: ${(props) =>
+    (props.size === "big" ? 600 : props.size === "slide" ? 1024 : 400)}px;
 
   h1 {
     font-size: 26px;

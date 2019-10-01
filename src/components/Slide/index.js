@@ -1,11 +1,12 @@
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import back from '../../assets/images/back.svg';
-import next from '../../assets/images/next.svg';
+
 import SlideActions from '../../store/ducks/slide';
-import { Container, SlideBody, SlideHeader } from './styles';
+import {
+ Container, SlideBody, SlideHeader, Back, Next 
+} from './styles';
 
 function Slide() {
   const dispatch = useDispatch();
@@ -26,23 +27,17 @@ function Slide() {
     files && (
       <Container>
         <SlideHeader>
-          <FontAwesomeIcon icon={faWindowClose} onClick={closeSlideModal} />
+          <FontAwesomeIcon icon={faTimes} onClick={closeSlideModal} />
         </SlideHeader>
         <SlideBody>
+          <Back title="imagem anterior" onClick={selectPrevSlide} />
           <img
-            src={back}
-            alt="imagem anterior"
-            onClick={selectPrevSlide}
-            width="50px"
+            src={selectedImage && selectedImage.url}
+            width="100%"
+            alt={selectedImage ? selectedImage.name : 'Imagem MaphIst'}
           />
-          <img src={selectedImage.url} width="100%" />
 
-          <img
-            src={next}
-            alt="próxima imagem"
-            onClick={selectNextSlide}
-            width="50px"
-          />
+          <Next title="próxima imagem" onClick={selectNextSlide} />
         </SlideBody>
       </Container>
     )
