@@ -20,8 +20,8 @@ function Slide() {
     dispatch(SlideActions.prevModalSlide());
   }
   const { files } = JSON.parse(localStorage.getItem('@maphist:project'));
-
-  const selectedImage = files[useSelector((state) => state.slide.activeIndex)];
+  const index = useSelector((state) => state.slide.activeIndex);
+  const selectedImage = files[index];
 
   return (
     files && (
@@ -36,7 +36,6 @@ function Slide() {
             width="100%"
             alt={selectedImage ? selectedImage.name : 'Imagem MaphIst'}
           />
-
           <Next title="próxima imagem" onClick={selectNextSlide} />
         </SlideBody>
       </Container>

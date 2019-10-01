@@ -15,7 +15,7 @@ export const SlideHeader = styled.div`
     width: 25px;
     height: 25px;
     cursor: pointer;
-    transition: all 0.4s;
+    transition: all 0.2s;
     &:hover {
       color: #7289da;
     }
@@ -40,7 +40,7 @@ export const Back = styled(BackBtn)`
   width: 100px;
   height: 200px;
   cursor: pointer;
-  transition: all 0.4s;
+  transition: all 0.2s;
   &:hover {
     fill: #7289da;
   }
@@ -50,7 +50,7 @@ export const Next = styled(NextBtn)`
   width: 100px;
   height: 200px;
   cursor: pointer;
-  transition: all 0.4s;
+  transition: all 0.2s;
   &:hover {
     fill: #7289da;
   }

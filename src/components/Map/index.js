@@ -6,6 +6,20 @@ import { useSelector } from 'react-redux';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
+  const projects = useSelector((state) => state.projects);
+
+  const [latitudes, setLatitudes] = useState(null);
+
+  useEffect(() => {
+    const arrayLat = projects.data.map((project) => parseFloat(project.lat));
+    const maxArrayAbs = arrayLat.map((lat) => Math.abs(lat));
+    const maxArray = Math.max(...maxArrayAbs);
+
+    setLatitudes(maxArray);
+  }, [projects.data]);
+
+  console.log('Latitudes: ' + latitudes);
+
   const [viewport, setViewPort] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -14,7 +28,8 @@ function Map() {
     zoom: 14,
   });
 
-  const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 30 });
+  const _onViewportChange = (viewport) =>
+    setViewPort({ ...viewport, transitionDuration: 30 });
 
   // handleClickMap = async e => {
   //   const [longitude, latitude] = e.lngLat;
@@ -23,7 +38,6 @@ function Map() {
   //   await openModal({ latitude, longitude });
   // };
 
-  const projects = useSelector((state) => state.projects);
   console.log(projects);
   return (
     <MapGL
@@ -36,19 +50,17 @@ function Map() {
       {projects.data.map((project) => (
         <Marker
           key={project.id}
-          latitude={project.lat}
-          longitude={project.lng}
+          latitude={parseFloat(project.lat)}
+          longitude={parseFloat(project.lng)}
           // onClick={this.handleMapClick}
           captureClick
         >
           <img
-            style={{
-              borderRadius: 100,
-              width: 48,
-              height: 48,
-            }}
-            src={project.avatar_url}
-            alt={project.name}
+            style={{ borderRadius: '50%' }}
+            src={`https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=${project.title}`}
+            alt={project.title}
+            width="50px"
+            height="50px"
           />
         </Marker>
       ))}

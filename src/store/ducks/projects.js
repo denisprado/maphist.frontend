@@ -33,7 +33,7 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
   data: [],
   projectModalOpen: false,
-  project: JSON.parse(localStorage.getItem('@maphist:project')) || null,
+  project: null,
 });
 
 /* Reducers */

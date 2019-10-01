@@ -10,7 +10,6 @@ function ProjectContent() {
     <>
       <Container>
         <p>{p.description}</p>
-        <p>{`Lat: ${p.lat} Lng: ${p.lng}`}</p>
       </Container>
     </>
   ) : null;

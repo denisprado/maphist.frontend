@@ -6,10 +6,11 @@ import Map from '../../components/Map';
 // import { Container } from './styles';
 
 function MapView() {
+  const activeTeam = useSelector((state) => state.teams.active);
   return (
     <Container>
       <TeamSwitcher />
-      <Map />
+      {activeTeam ? <Map /> : null}
     </Container>
   );
 }
