@@ -25,6 +25,10 @@ function Projects() {
     dispatch(ProjectsActions.selectProject(project));
   };
 
+  function setMapView() {
+    dispatch(ProjectsActions.setMapView());
+  }
+
   if (!activeTeam) return null;
 
   return (
@@ -33,6 +37,7 @@ function Projects() {
         <header>
           <h1>{activeTeam.name}</h1>
           <div>
+            <Button onClick={setMapView}>Mapview</Button>
             <Can checkPermission="projects_create">
               <Button onClick={handleOpenModal}>+ Novo</Button>
             </Can>

@@ -23,6 +23,7 @@ const { Types, Creators } = createActions({
   createProjectSuccess: ['project'],
   deleteProjectRequest: ['project'],
   deleteProjectSuccess: ['id'],
+  setMapView: null,
 });
 
 export const ProjectsTypes = Types;
@@ -34,6 +35,7 @@ export const INITIAL_STATE = Immutable({
   data: [],
   projectModalOpen: false,
   project: null,
+  mapView: false,
 });
 
 /* Reducers */
@@ -59,14 +61,14 @@ export const updateProject = (state, { project }) => {
 export const logout = (state) => state.merge({ signedIn: false, token: null });
 export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
-export const createSuccess = (state, { project }) =>
-  state.merge({ data: [...state.data, project] });
-
+export const createSuccess = (state, { project }) => state.merge({ data: [...state.data, project] });
+export const setMapTrue = (state) => state.merge({ mapView: true });
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_PROJECTS_SUCCESS]: getSuccess,
   [Types.SELECT_PROJECT]: showProject,
+  [Types.SET_MAP_VIEW]: setMapTrue,
   [Types.UPDATE_PROJECT_SUCCESS]: updateProject,
   [Types.OPEN_PROJECT_MODAL]: openModal,
   [Types.CLOSE_PROJECT_MODAL]: closeModal,
