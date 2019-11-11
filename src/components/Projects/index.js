@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
 import Button from '../../styles/components/Buttons';
+import { ModalForm } from '../Modal/styles';
 
 import Members from '../Members';
 import ProjectCreateModal from '../ProjectCreateModal';
@@ -27,6 +29,10 @@ function Projects() {
 
   function setMapView() {
     dispatch(ProjectsActions.setMapView());
+  }
+
+  function handleClickDeleteProject(project) {
+    dispatch(ProjectsActions.deleteProjectRequest(project));
   }
 
   if (!activeTeam) return null;
@@ -64,6 +70,10 @@ function Projects() {
             }
           >
             {project.title}
+            <FontAwesomeIcon
+              onClick={() => handleClickDeleteProject(p)}
+              icon={faTrash}
+            />
           </Project>
         ))}
         <ProjectCreateModal />

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import FilesActions from '../../store/ducks/files';
 import Button from '../../styles/components/Buttons';
-import { ModalForm } from '../Modal/styles';
 
 function UploadFiles() {
   const dispatch = useDispatch();
