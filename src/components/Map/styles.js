@@ -15,5 +15,5 @@ export const MapHeader = styled.div`
 
 export const ContainerProjectContent = styled.div`
   position: absolute;
-  right: 16rem;
+  right: 1rem;
 `;
