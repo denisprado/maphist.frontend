@@ -20,7 +20,7 @@ import {
 } from './styles';
 import ProjectContentfiles from '../ProjectContentFiles';
 
-function ProjectContent({ showMap }) {
+function ProjectContent({ showMap, tools }) {
   const dispatch = useDispatch();
   const p = keysToCamel(useSelector((state) => state.projects.active));
 
@@ -55,20 +55,22 @@ function ProjectContent({ showMap }) {
             <h1>{p.title}</h1>
             <h3>{`${p.startYear} - ${p.endYear}`}</h3>
           </div>
-          <Tools>
-            <ToolsIcon>
-              <FontAwesomeIcon
-                onClick={() => handleClickUploadFiles(p)}
-                icon={faPhotoVideo}
-              />
-            </ToolsIcon>
-            <ToolsIcon>
-              <FontAwesomeIcon
-                onClick={() => handleClickDeleteProject(p)}
-                icon={faTrash}
-              />
-            </ToolsIcon>
-          </Tools>
+          {tools && (
+            <Tools>
+              <ToolsIcon>
+                <FontAwesomeIcon
+                  onClick={() => handleClickUploadFiles(p)}
+                  icon={faPhotoVideo}
+                />
+              </ToolsIcon>
+              <ToolsIcon>
+                <FontAwesomeIcon
+                  onClick={() => handleClickDeleteProject(p)}
+                  icon={faTrash}
+                />
+              </ToolsIcon>
+            </Tools>
+          )}
         </ProjectHeader>
         <ProjectBody>
           <ProjectContentMapAndDescription>

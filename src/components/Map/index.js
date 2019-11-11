@@ -38,7 +38,8 @@ function Map() {
     dispatch(ProjectsActions.setListView());
   }
 
-  const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 30 });
+  const _onViewportChange = (viewport) =>
+    setViewPort({ ...viewport, transitionDuration: 30 });
 
   const handleSelectProject = (project) => {
     dispatch(ProjectsActions.selectProject(project));
@@ -86,7 +87,7 @@ function Map() {
         </MapGL>
         {selectedProject && (
           <ContainerProjectContent>
-            <ProjectContent showMap={false} />
+            <ProjectContent showMap={false} tools={false} />
           </ContainerProjectContent>
         )}
       </Container>

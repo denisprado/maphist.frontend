@@ -11,7 +11,7 @@ function Main() {
   const mapView = useSelector((state) => state.projects.mapView);
   return (
     <Container>
-      <TeamSwitcher />
+      {mapView ? <TeamSwitcher show={false} /> : <TeamSwitcher show />}
       {!mapView ? <Projects /> : <Map />}
 
       {!mapView && activeTeam ? <ProjectContent showMap /> : null}

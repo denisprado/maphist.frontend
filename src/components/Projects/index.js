@@ -1,22 +1,25 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { faTrash, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
+import FilesActions from '../../store/ducks/files';
 import Button from '../../styles/components/Buttons';
-import { ModalForm } from '../Modal/styles';
 
+import UploadFiles from '../UploadFiles';
 import Members from '../Members';
 import ProjectCreateModal from '../ProjectCreateModal';
 import { Container, Project } from './styles';
 import Can from '../Can';
+import Modal from '../Modal';
 
 function Projects() {
   const projects = useSelector((state) => state.projects);
   const selectedProject = useSelector((state) => state.projects.active);
   const members = useSelector((state) => state.members);
   const activeTeam = useSelector((state) => state.teams.active);
-
+  const modalUploadOpen = useSelector((state) => state.files.modalUploadOpen);
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
@@ -34,6 +37,10 @@ function Projects() {
   function handleClickDeleteProject(project) {
     dispatch(ProjectsActions.deleteProjectRequest(project));
   }
+
+  const handleClickUploadFiles = () => {
+    dispatch(FilesActions.openModalUpload());
+  };
 
   if (!activeTeam) return null;
 
@@ -70,14 +77,25 @@ function Projects() {
             }
           >
             {project.title}
-            <FontAwesomeIcon
-              onClick={() => handleClickDeleteProject(p)}
-              icon={faTrash}
-            />
+            <div>
+              <FontAwesomeIcon
+                onClick={() => handleClickUploadFiles(project)}
+                icon={faPhotoVideo}
+              />
+              <FontAwesomeIcon
+                onClick={() => handleClickDeleteProject(project)}
+                icon={faTrash}
+              />
+            </div>
           </Project>
         ))}
         <ProjectCreateModal />
         {members.memberModalOpen && <Members />}
+        {modalUploadOpen ? (
+          <Modal>
+            <UploadFiles />
+          </Modal>
+        ) : null}
       </Container>
     </>
   );

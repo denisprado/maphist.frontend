@@ -42,7 +42,6 @@ const Button = styled.button.attrs({
 })`
   border-radius: 3px;
   transition: background-color 0.15s ease;
-  background: #7289da;
   border: 0;
   color: #fff;
   font-size: 12px;
@@ -54,7 +53,8 @@ const Button = styled.button.attrs({
   ${(props) => sizes[props.sizes || 'default']}
   ${(props) => colors[props.color || 'default']}
 
-  ${(props) => props.filled === false
+  ${(props) =>
+    props.filled === true
     && css`
       background: transparent;
       border: 0;

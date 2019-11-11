@@ -11,7 +11,7 @@ import AuthActions from '../../store/ducks/auth';
 import Modal from '../Modal';
 import Button from '../../styles/components/Buttons';
 
-function TeamSwitcher() {
+function TeamSwitcher({ show }) {
   const teams = useSelector((state) => state.teams);
 
   const dispatch = useDispatch();
@@ -41,44 +41,48 @@ function TeamSwitcher() {
   };
 
   return (
-    <Container>
-      <TeamList>
-        {teams.data.map((team) => (
-          <Team key={team.id} onClick={() => handleTeamSelect(team)}>
-            <img
-              alt={team.name}
-              src={
-                'https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name='
-                + team.name
-              }
-            />
-          </Team>
-        ))}
-        <NewTeam onClick={() => handleNewTeam()}>Novo</NewTeam>
-        {teams.teamModalOpen && (
-          <Modal>
-            <h1>Criar time</h1>
+    <>
+      {show && (
+        <Container>
+          <TeamList>
+            {teams.data.map((team) => (
+              <Team key={team.id} onClick={() => handleTeamSelect(team)}>
+                <img
+                  alt={team.name}
+                  src={
+                    'https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name='
+                    + team.name
+                  }
+                />
+              </Team>
+            ))}
+            <NewTeam onClick={() => handleNewTeam()}>Novo</NewTeam>
+            {teams.teamModalOpen && (
+              <Modal>
+                <h1>Criar time</h1>
 
-            <ModalForm onSubmit={handleNewTeamSubmit}>
-              <span>NOME</span>
-              <ModalInput name="name" />
+                <ModalForm onSubmit={handleNewTeamSubmit}>
+                  <span>NOME</span>
+                  <ModalInput name="name" />
 
-              <Button size="big" type="submit">
-                Salvar
-              </Button>
-              <Button
-                size="small"
-                color="gray"
-                onClick={() => handleCancelNewTeam()}
-              >
-                Cancelar
-              </Button>
-            </ModalForm>
-          </Modal>
-        )}
-      </TeamList>
-      <Logout onClick={signOut}>Sair</Logout>
-    </Container>
+                  <Button size="big" type="submit">
+                    Salvar
+                  </Button>
+                  <Button
+                    size="small"
+                    color="gray"
+                    onClick={() => handleCancelNewTeam()}
+                  >
+                    Cancelar
+                  </Button>
+                </ModalForm>
+              </Modal>
+            )}
+          </TeamList>
+          <Logout onClick={signOut}>Sair</Logout>
+        </Container>
+      )}
+    </>
   );
 }
 

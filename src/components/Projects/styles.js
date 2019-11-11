@@ -25,13 +25,15 @@ export const Container = styled.div`
 
 export const Project = styled.button`
   flex: 1;
-  flex-direction: column;
-  flex-flow: column-nowrap;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: space-between;
   width: 100%;
   border: none;
   display: flex;
   flex-grow: 1;
-  background: ${(props) => (props.active ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)")};
+  background: ${(props) =>
+    (props.active ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)")};
   margin: 0 0 20px;
   border: ${(props) => props.active && '2px solid #7159c1'};
   color: #fff;
