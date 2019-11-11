@@ -56,6 +56,8 @@ const Button = styled.button.attrs({
 
   ${(props) => props.filled === false
     && css`
+      background: transparent;
+      border: 0;
       background: none;
       &:hover {
         background: none;

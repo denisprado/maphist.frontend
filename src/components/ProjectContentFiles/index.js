@@ -9,7 +9,6 @@ import Slide from '../Slide';
 function ProjectContentFiles() {
   const dispatch = useDispatch();
   function openSlideModal(index) {
-    console.log(index);
     dispatch(SlideActions.openModalSlide(index));
   }
 

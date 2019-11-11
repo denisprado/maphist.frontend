@@ -5,8 +5,9 @@ export const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   padding: 20px;
+  padding-left: 0;
   align-content: flex-start;
-  justify-itens: space-between;
+  justify-items: space-between;
   min-width: 265px;
 `;
 

@@ -24,6 +24,7 @@ const { Types, Creators } = createActions({
   deleteProjectRequest: ['project'],
   deleteProjectSuccess: ['id'],
   setMapView: null,
+  setListView: null,
 });
 
 export const ProjectsTypes = Types;
@@ -63,12 +64,14 @@ export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
 export const createSuccess = (state, { project }) => state.merge({ data: [...state.data, project] });
 export const setMapTrue = (state) => state.merge({ mapView: true });
+export const setListTrue = (state) => state.merge({ mapView: false });
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_PROJECTS_SUCCESS]: getSuccess,
   [Types.SELECT_PROJECT]: showProject,
   [Types.SET_MAP_VIEW]: setMapTrue,
+  [Types.SET_LIST_VIEW]: setListTrue,
   [Types.UPDATE_PROJECT_SUCCESS]: updateProject,
   [Types.OPEN_PROJECT_MODAL]: openModal,
   [Types.CLOSE_PROJECT_MODAL]: closeModal,

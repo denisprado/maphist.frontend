@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../Modal';
 import ProjectsActions from '../../store/ducks/projects';
@@ -29,7 +29,18 @@ function ProjectCreateModal() {
       ),
     );
   }
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === 'Escape') {
+        dispatch(ProjectsActions.closeProjectModal());
+      }
+    };
+    window.addEventListener('keydown', listener);
 
+    return () => {
+      window.removeEventListener('keydown', listener);
+    };
+  }, [dispatch]);
   return projects.projectModalOpen ? (
     <Modal size="big">
       <h1>Criar projeto</h1>

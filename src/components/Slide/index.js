@@ -1,6 +1,6 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SlideActions from '../../store/ducks/slide';
@@ -10,9 +10,24 @@ import {
 
 function Slide() {
   const dispatch = useDispatch();
-  function closeSlideModal() {
+
+  const closeSlideModal = useCallback(() => {
     dispatch(SlideActions.closeModalSlide());
-  }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === 'Escape') {
+        closeSlideModal();
+      }
+    };
+    window.addEventListener('keydown', listener);
+
+    return () => {
+      window.removeEventListener('keydown', listener);
+    };
+  }, [closeSlideModal]);
+
   function selectNextSlide() {
     dispatch(SlideActions.nextModalSlide());
   }

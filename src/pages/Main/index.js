@@ -14,7 +14,7 @@ function Main() {
       <TeamSwitcher />
       {!mapView ? <Projects /> : <Map />}
 
-      {!mapView && activeTeam ? <ProjectContent /> : null}
+      {!mapView && activeTeam ? <ProjectContent showMap /> : null}
     </Container>
   );
 }

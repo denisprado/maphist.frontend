@@ -7,10 +7,10 @@ export const Container = styled.div`
   justify-content: flex-start;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 0, 0, 0.8);
-  margin: 30px 20px;
+  margin: 15px 10px;
   border-radius: 5px;
-  padding: 20px;
-  width: 1024px;
+  padding: 10px;
+  width: 684px;
 `;
 
 export const ProjectHeader = styled.header`

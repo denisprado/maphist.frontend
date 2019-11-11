@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FilesActions from '../../store/ducks/files';
 import Button from '../../styles/components/Buttons';
@@ -24,6 +24,19 @@ function UploadFiles() {
     }
     dispatch(FilesActions.uploadFilesRequest(data, p.id));
   }
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === 'Escape') {
+        dispatch(FilesActions.closeModalUpload());
+      }
+    };
+    window.addEventListener('keydown', listener);
+
+    return () => {
+      window.removeEventListener('keydown', listener);
+    };
+  }, [dispatch]);
 
   return (
     <ModalForm onSubmit={onSubmit} encType="multipart/form-data">

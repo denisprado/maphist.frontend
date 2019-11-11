@@ -1,6 +1,6 @@
 import { faPhotoVideo, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import keysToCamel from '../../resources/helpers';
 import FilesActions from '../../store/ducks/files';
@@ -20,7 +20,7 @@ import {
 } from './styles';
 import ProjectContentfiles from '../ProjectContentFiles';
 
-function ProjectContent() {
+function ProjectContent({ showMap }) {
   const dispatch = useDispatch();
   const p = keysToCamel(useSelector((state) => state.projects.active));
 
@@ -33,6 +33,19 @@ function ProjectContent() {
   const handleClickUploadFiles = () => {
     dispatch(FilesActions.openModalUpload());
   };
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === 'Escape') {
+        dispatch(ProjectActions.selectProject(null));
+      }
+    };
+    window.addEventListener('keydown', listener);
+
+    return () => {
+      window.removeEventListener('keydown', listener);
+    };
+  }, [dispatch]);
 
   return p ? (
     <>
@@ -59,11 +72,10 @@ function ProjectContent() {
         </ProjectHeader>
         <ProjectBody>
           <ProjectContentMapAndDescription>
-            <MapWithMarker />
-
+            {showMap && <MapWithMarker />}
+            <ProjectContentfiles />
             <ProjectContentDescription />
           </ProjectContentMapAndDescription>
-          <ProjectContentfiles />
         </ProjectBody>
       </Container>
       {modalUploadOpen ? (
