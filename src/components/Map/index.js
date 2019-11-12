@@ -6,6 +6,7 @@ import ProjectsActions from '../../store/ducks/projects';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Container, MapHeader, ContainerProjectContent } from './styles';
 import ProjectContent from '../ProjectContent';
+import Filters from '../Filters';
 
 function Map() {
   const dispatch = useDispatch();
@@ -38,8 +39,7 @@ function Map() {
     dispatch(ProjectsActions.setListView());
   }
 
-  const _onViewportChange = (viewport) =>
-    setViewPort({ ...viewport, transitionDuration: 30 });
+  const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 30 });
 
   const handleSelectProject = (project) => {
     dispatch(ProjectsActions.selectProject(project));
@@ -63,26 +63,29 @@ function Map() {
           mapboxApiAccessToken="pk.eyJ1IjoiZGVuaXNmb3JpZ28iLCJhIjoiY2p2b2Q1eTV6MThwYzN5bnR4Z3BhaHMxMSJ9.fv6R6cp122BKk6B781-z2A"
         >
           <MapHeader>
-            <Button onClick={handleSetList}>Lista</Button>
+            <Button onClick={handleSetList}>Visualização em Lista</Button>
+            <Filters />
           </MapHeader>
 
           {projects.data.map((project) => (
-            <Marker
-              key={project.id}
-              latitude={parseFloat(project.lat)}
-              longitude={parseFloat(project.lng)}
-              captureClick
-            >
-              <Button filled onClick={() => handleSelectProject(project)}>
-                <img
-                  style={{ borderRadius: '50%' }}
-                  src={`https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=${project.title}`}
-                  alt={project.title}
-                  width="50px"
-                  height="50px"
-                />
-              </Button>
-            </Marker>
+            <>
+              <Marker
+                key={project.id}
+                latitude={parseFloat(project.lat)}
+                longitude={parseFloat(project.lng)}
+                captureClick
+              >
+                <Button link onClick={() => handleSelectProject(project)}>
+                  <img
+                    style={{ borderRadius: '50%' }}
+                    src={`https://ui-avatars.com/api/?font-size=0.58&background=7159c1&color=fff&name=${project.title}`}
+                    alt={project.title}
+                    width="35px"
+                    height="35px"
+                  />
+                </Button>
+              </Marker>
+            </>
           ))}
         </MapGL>
         {selectedProject && (

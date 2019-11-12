@@ -53,14 +53,21 @@ const Button = styled.button.attrs({
   ${(props) => sizes[props.sizes || 'default']}
   ${(props) => colors[props.color || 'default']}
 
-  ${(props) =>
-    props.filled === true
+  ${(props) => props.link === true
     && css`
       background: transparent;
       border: 0;
-      background: none;
       &:hover {
         background: none;
+        opacity: 0.6;
+      }
+    `}
+  ${(props) => props.filled === true
+    && css`
+      background: transparent;
+      border: 1px solid #7289da;
+      &:hover {
+        background: #7289da;
         opacity: 0.6;
       }
     `}

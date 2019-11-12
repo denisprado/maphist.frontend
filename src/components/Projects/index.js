@@ -1,18 +1,18 @@
+import { faPhotoVideo, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { faTrash, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FilesActions from '../../store/ducks/files';
 import MembersActions from '../../store/ducks/members';
 import ProjectsActions from '../../store/ducks/projects';
-import FilesActions from '../../store/ducks/files';
 import Button from '../../styles/components/Buttons';
-
-import UploadFiles from '../UploadFiles';
-import Members from '../Members';
-import ProjectCreateModal from '../ProjectCreateModal';
-import { Container, Project } from './styles';
 import Can from '../Can';
+import Members from '../Members';
 import Modal from '../Modal';
+import { Tools, ToolsIcon } from '../ProjectContent/styles';
+import ProjectCreateModal from '../ProjectCreateModal';
+import UploadFiles from '../UploadFiles';
+import { Container, Project } from './styles';
 
 function Projects() {
   const projects = useSelector((state) => state.projects);
@@ -31,6 +31,7 @@ function Projects() {
   };
 
   function setMapView() {
+    dispatch(ProjectsActions.selectProject(null));
     dispatch(ProjectsActions.setMapView());
   }
 
@@ -77,16 +78,20 @@ function Projects() {
             }
           >
             {project.title}
-            <div>
-              <FontAwesomeIcon
-                onClick={() => handleClickUploadFiles(project)}
-                icon={faPhotoVideo}
-              />
-              <FontAwesomeIcon
-                onClick={() => handleClickDeleteProject(project)}
-                icon={faTrash}
-              />
-            </div>
+            <Tools>
+              <ToolsIcon>
+                <FontAwesomeIcon
+                  onClick={() => handleClickUploadFiles(project)}
+                  icon={faPhotoVideo}
+                />
+              </ToolsIcon>
+              <ToolsIcon>
+                <FontAwesomeIcon
+                  onClick={() => handleClickDeleteProject(project)}
+                  icon={faTrash}
+                />
+              </ToolsIcon>
+            </Tools>
           </Project>
         ))}
         <ProjectCreateModal />
