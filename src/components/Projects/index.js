@@ -11,6 +11,9 @@ import Members from '../Members';
 import Modal from '../Modal';
 import { Tools, ToolsIcon } from '../ProjectContent/styles';
 import ProjectCreateModal from '../ProjectCreateModal';
+import CategoryCreateModal from '../CategoryCreateModal';
+import CategoriesActions from '../../store/ducks/categories';
+
 import UploadFiles from '../UploadFiles';
 import { Container, Project } from './styles';
 
@@ -21,6 +24,8 @@ function Projects() {
   const activeTeam = useSelector((state) => state.teams.active);
   const modalUploadOpen = useSelector((state) => state.files.modalUploadOpen);
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
+  const { categoryModalOpen } = categories;
 
   const handleOpenModal = () => {
     dispatch(ProjectsActions.openProjectModal());
@@ -29,6 +34,10 @@ function Projects() {
   const handleSelectProject = (project) => {
     dispatch(ProjectsActions.selectProject(project));
   };
+
+  function handleCreateCategory() {
+    dispatch(CategoriesActions.openCategoryModal());
+  }
 
   function setMapView() {
     dispatch(ProjectsActions.selectProject(null));
@@ -51,9 +60,12 @@ function Projects() {
         <header>
           <h1>{activeTeam.name}</h1>
           <div>
-            <Button onClick={setMapView}>Mapview</Button>
+            <Button onClick={setMapView}>Ver projetos no mapa</Button>
             <Can checkPermission="projects_create">
-              <Button onClick={handleOpenModal}>+ Novo</Button>
+              <Button onClick={handleOpenModal}>+ Local</Button>
+              <Button type="button" onClick={handleCreateCategory}>
+                + Categoria
+              </Button>
             </Can>
             <Button
               onClick={() => {
@@ -77,6 +89,7 @@ function Projects() {
                 : null
             }
           >
+            {console.log(categories)}
             {project.title}
             <Tools>
               <ToolsIcon>
@@ -95,6 +108,7 @@ function Projects() {
           </Project>
         ))}
         <ProjectCreateModal />
+        {categoryModalOpen && <CategoryCreateModal />}
         {members.memberModalOpen && <Members />}
         {modalUploadOpen ? (
           <Modal>

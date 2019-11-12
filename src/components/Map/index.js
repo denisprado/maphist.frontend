@@ -15,6 +15,15 @@ function Map() {
   const [lat, setLat] = useState(-22.9474984);
   const [lng, setLng] = useState(-47.0879169);
 
+  const { date } = useSelector((state) => state.projects.filter);
+  const [startYear, endYear] = date;
+
+  const filterProjects = projects.data.filter(
+    (p) => p.start_year <= startYear && p.end_year >= endYear,
+  );
+
+  console.log(filterProjects);
+
   useEffect(() => {
     const arrayLat = projects.data.map((project) => Number(project.lat));
     const arrayLng = projects.data.map((project) => Number(project.lng));
@@ -39,7 +48,8 @@ function Map() {
     dispatch(ProjectsActions.setListView());
   }
 
-  const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 30 });
+  const _onViewportChange = (viewport) =>
+    setViewPort({ ...viewport, transitionDuration: 30 });
 
   const handleSelectProject = (project) => {
     dispatch(ProjectsActions.selectProject(project));
@@ -55,6 +65,7 @@ function Map() {
   return (
     projects && (
       <Container>
+        <Filters />
         <MapGL
           {...viewport}
           mapStyle="mapbox://styles/denisforigo/ck2to0j2s5jo31do1s4s94bwx"
@@ -64,10 +75,9 @@ function Map() {
         >
           <MapHeader>
             <Button onClick={handleSetList}>Visualização em Lista</Button>
-            <Filters />
           </MapHeader>
 
-          {projects.data.map((project) => (
+          {filterProjects.map((project) => (
             <>
               <Marker
                 key={project.id}
@@ -84,6 +94,7 @@ function Map() {
                     height="35px"
                   />
                 </Button>
+                {console.log(project)}
               </Marker>
             </>
           ))}

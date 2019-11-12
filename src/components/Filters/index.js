@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Container } from './styles';
 import RangeYears from './RangeYears';
+import CheckBoxCategories from './CheckBoxCategories';
 
 function Filters() {
-  const [date, setDate] = useState([new Date(), new Date()]);
-
   return (
     <Container>
       <h2>Filtros</h2>
-      <label htmlFor="ano">Ano de início</label>
       <RangeYears />
+      <CheckBoxCategories />
     </Container>
   );
 }

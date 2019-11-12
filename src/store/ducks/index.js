@@ -8,8 +8,10 @@ import { reducer as projects } from './projects';
 import { reducer as members } from './members';
 import { reducer as files } from './files';
 import { reducer as slide } from './slide';
+import { reducer as categories } from './categories';
 
-export default (history) => combineReducers({
+export default (history) =>
+  combineReducers({
     auth,
     toastr,
     teams,
@@ -17,5 +19,6 @@ export default (history) => combineReducers({
     members,
     files,
     slide,
+    categories,
     router: connectRouter(history),
   });

@@ -7,12 +7,12 @@ export const Container = styled.div`
   width: 15vw;
   height: 50vh;
   background-color: black;
-  border: 1px solid #7289da;
+  border: 2px solid #7289da;
   opacity: 0.85;
   padding: 1rem;
   border-radius: 0.5rem;
-  z-index: 9999;
-  label {
+  z-index: 1;
+  div {
     margin-top: 1rem;
   }
 `;

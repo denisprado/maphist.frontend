@@ -4,8 +4,9 @@ import Immutable from 'seamless-immutable';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  getProjectsRequest: null,
+  getProjectsRequest: [null],
   getProjectsSuccess: ['data'],
+  setProjectFilter: ['filter'],
   selectProject: ['project'],
   updateProjectRequest: null,
   updateProjectSuccess: ['project'],
@@ -19,6 +20,7 @@ const { Types, Creators } = createActions({
     'lng',
     'startYear',
     'endYear',
+    'category_id',
   ],
   createProjectSuccess: ['project'],
   deleteProjectRequest: ['project'],
@@ -37,6 +39,7 @@ export const INITIAL_STATE = Immutable({
   projectModalOpen: false,
   project: null,
   mapView: false,
+  filter: { date: [1700, 2019] },
 });
 
 /* Reducers */
@@ -62,9 +65,12 @@ export const updateProject = (state, { project }) => {
 export const logout = (state) => state.merge({ signedIn: false, token: null });
 export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
-export const createSuccess = (state, { project }) => state.merge({ data: [...state.data, project] });
+export const createSuccess = (state, { project }) =>
+  state.merge({ data: [...state.data, project] });
 export const setMapTrue = (state) => state.merge({ mapView: true });
 export const setListTrue = (state) => state.merge({ mapView: false });
+export const setFilter = (state, { filter }) => state.merge({ filter });
+
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -77,4 +83,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CLOSE_PROJECT_MODAL]: closeModal,
   [Types.CREATE_PROJECT_SUCCESS]: createSuccess,
   [Types.DELETE_PROJECT_SUCCESS]: deleteSuccess,
+  [Types.SET_PROJECT_FILTER]: setFilter,
 });

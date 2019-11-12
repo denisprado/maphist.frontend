@@ -14,6 +14,7 @@ import {
   deleteProject,
   updateProject,
 } from './projects';
+import { CategoriesTypes } from '../ducks/categories';
 import { ProjectsTypes } from '../ducks/projects';
 
 import { getMembers, updateMember, inviteMember } from './members';
@@ -21,6 +22,8 @@ import { MembersTypes } from '../ducks/members';
 
 import { uploadFiles } from './files';
 import { FilesTypes } from '../ducks/files';
+
+import { createCategory, deleteCategory, getCategories } from './categories';
 
 export default function* rootSaga() {
   return yield all([
@@ -42,6 +45,11 @@ export default function* rootSaga() {
 
     takeLatest(FilesTypes.UPLOAD_FILES_REQUEST, uploadFiles),
     takeLatest(FilesTypes.UPLOAD_FILES_SUCCESS, updateProject),
+
+    takeLatest(CategoriesTypes.GET_CATEGORIES_REQUEST, getCategories),
+    takeLatest(CategoriesTypes.CREATE_CATEGORY_REQUEST, createCategory),
+    takeLatest(CategoriesTypes.DELETE_CATEGORY_REQUEST, deleteCategory),
+    takeLatest(CategoriesTypes.DELETE_CATEGORY_SUCCESS, getCategories),
 
     takeLatest(MembersTypes.GET_MEMBERS_REQUEST, getMembers),
     takeLatest(MembersTypes.UPDATE_MEMBER_REQUEST, updateMember),

@@ -1,31 +1,37 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { useDispatch, useSelector } from 'react-redux';
+import ProjectActions from '../../../store/ducks/projects';
 
 function valuetext(value) {
   return `${value}`;
 }
-export default function RangeSlider() {
-  const [value, setValue] = React.useState([1500, 2019]);
 
+export default function RangeSlider() {
+  const dispatch = useDispatch();
+
+  const { date } = useSelector((state) => state.projects.filter);
+
+  // console.log(`${date[0]} -> ${date[1]}`);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    dispatch(ProjectActions.setProjectFilter({ date: newValue }));
   };
 
   return (
     <div>
-      <Typography id="range-slider" gutterBottom>
-        Período
-      </Typography>
       <Slider
-        min={1500}
+        min={1700}
         max={2019}
-        valueLabelDisplay="on"
-        value={value}
+        valueLabelDisplay="auto"
         onChange={handleChange}
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
+        value={[date[0], date[1]]}
       />
+      <Typography id="range-slider" gutterBottom>
+        {`${date[0]} a ${date[1]}`}
+      </Typography>
     </div>
   );
 }
