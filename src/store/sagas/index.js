@@ -1,29 +1,23 @@
 import { all, fork, takeLatest } from 'redux-saga/effects';
-
-import {
- signIn, signOut, signUp, getPermissions 
-} from './auth';
 import { AuthTypes } from '../ducks/auth';
-
-import { getTeams, createTeam } from './teams';
+import { CategoriesTypes } from '../ducks/categories';
+import { FilesTypes } from '../ducks/files';
+import { MembersTypes } from '../ducks/members';
+import { ProjectsTypes } from '../ducks/projects';
 import { TeamTypes } from '../ducks/teams';
-
 import {
-  getProjects,
+ getPermissions, signIn, signOut, signUp 
+} from './auth';
+import { createCategory, deleteCategory, getCategories } from './categories';
+import { uploadFiles } from './files';
+import { getMembers, inviteMember, updateMember } from './members';
+import {
   createProject,
   deleteProject,
+  getProjects,
   updateProject,
 } from './projects';
-import { CategoriesTypes } from '../ducks/categories';
-import { ProjectsTypes } from '../ducks/projects';
-
-import { getMembers, updateMember, inviteMember } from './members';
-import { MembersTypes } from '../ducks/members';
-
-import { uploadFiles } from './files';
-import { FilesTypes } from '../ducks/files';
-
-import { createCategory, deleteCategory, getCategories } from './categories';
+import { createTeam, getTeams } from './teams';
 
 export default function* rootSaga() {
   return yield all([

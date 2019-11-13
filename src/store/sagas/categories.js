@@ -6,6 +6,7 @@ import CategoriesActions from '../ducks/categories';
 
 export function* getCategories() {
   const response = yield call(api.get, 'categories');
+  console.log('Resposta do saga');
   yield put(CategoriesActions.getCategoriesSuccess(response.data));
 }
 

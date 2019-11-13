@@ -19,10 +19,9 @@ function Map() {
   const [startYear, endYear] = date;
 
   const filterProjects = projects.data.filter(
-    (p) => p.start_year <= startYear && p.end_year >= endYear,
+    (p) => (p.start_year >= startYear && p.start_year <= endYear)
+      || (p.end_year >= startYear && p.end_year <= endYear),
   );
-
-  console.log(filterProjects);
 
   useEffect(() => {
     const arrayLat = projects.data.map((project) => Number(project.lat));
@@ -48,8 +47,7 @@ function Map() {
     dispatch(ProjectsActions.setListView());
   }
 
-  const _onViewportChange = (viewport) =>
-    setViewPort({ ...viewport, transitionDuration: 30 });
+  const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 30 });
 
   const handleSelectProject = (project) => {
     dispatch(ProjectsActions.selectProject(project));
@@ -94,7 +92,6 @@ function Map() {
                     height="35px"
                   />
                 </Button>
-                {console.log(project)}
               </Marker>
             </>
           ))}
