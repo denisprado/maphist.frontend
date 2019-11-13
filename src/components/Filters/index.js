@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Container } from './styles';
-import RangeYears from './RangeYears';
+import React from 'react';
 import CheckBoxCategories from './CheckBoxCategories';
-import CategoriesActions from '../../store/ducks/categories';
+import RangeYears from './RangeYears';
+import { Container } from './styles';
 
 function Filters() {
   return (

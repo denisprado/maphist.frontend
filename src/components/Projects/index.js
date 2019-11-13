@@ -89,7 +89,6 @@ function Projects() {
                 : null
             }
           >
-            {console.log(categories)}
             {project.title}
             <Tools>
               <ToolsIcon>

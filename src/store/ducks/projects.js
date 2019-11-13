@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  getProjectsRequest: [null],
+  getProjectsRequest: null,
   getProjectsSuccess: ['data'],
   setProjectFilter: ['filter'],
   selectProject: ['project'],
@@ -39,7 +39,7 @@ export const INITIAL_STATE = Immutable({
   projectModalOpen: false,
   project: null,
   mapView: false,
-  filter: { date: [1700, 2019], category_id: [1] },
+  filter: { date: [1700, 2019], category_id: [1, 2] },
 });
 
 /* Reducers */
@@ -65,7 +65,8 @@ export const updateProject = (state, { project }) => {
 export const logout = (state) => state.merge({ signedIn: false, token: null });
 export const openModal = (state) => state.merge({ projectModalOpen: true });
 export const closeModal = (state) => state.merge({ projectModalOpen: false });
-export const createSuccess = (state, { project }) => state.merge({ data: [...state.data, project] });
+export const createSuccess = (state, { project }) =>
+  state.merge({ data: [...state.data, project] });
 export const setMapTrue = (state) => state.merge({ mapView: true });
 export const setListTrue = (state) => state.merge({ mapView: false });
 export const setFilter = (state, { filter }) => state.merge({ filter });

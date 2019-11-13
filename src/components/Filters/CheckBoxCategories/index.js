@@ -1,43 +1,59 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CategoriesActions from '../../../store/ducks/categories';
 import ProjectsActions from '../../../store/ducks/projects';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 300,
-    color: '#fff',
-    backgroundColor: 'red',
-  },
-}));
+function CrossoutCheckbox({ text, valueOption }) {
+  const dispatch = useDispatch();
+  const { filter } = useSelector((state) => state.projects);
+  const { category_id } = filter;
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+  const initValues = category_id;
+
+  function handleChange(event) {
+    const { checked, value } = event.target;
+
+    const values =      initValues.indexOf(value) > -1 && !checked
+        ? initValues.filter((val) => val === value)
+        : [...initValues, value];
+
+    dispatch(ProjectsActions.setProjectFilter(values));
+
+    // const addValue = [...values, parseInt(event.target.value)];
+    // setValues(addValue);
+    console.log(valueOption);
+    // valores sem o
+    // const filteredValue = values.filter(
+    // (value) => parseInt(value.id) !== parseInt(event.target.value),
+    // );
+
+    // ProjectsActions.setProjectFilter(parseInt(event.target.value));
+
+    // setValues(event.target.checked ? addValue : filteredValue);
+  }
+
+  return (
+    <div>
+      <label htmlFor={text}>
+        <input
+          type="checkbox"
+          id={text}
+          defaultChecked={false}
+          onChange={handleChange}
+          value={valueOption}
+        />
+        {text}
+      </label>
+    </div>
+  );
+}
 
 export default function CheckBoxCategories() {
-  const classes = useStyles();
   const categories = useSelector((state) => state.categories);
   const { filter } = useSelector((state) => state.projects);
   const dispatch = useDispatch();
 
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState([filter.category_id]);
 
   useEffect(() => {
     dispatch(CategoriesActions.getCategoriesRequest());
@@ -45,35 +61,23 @@ export default function CheckBoxCategories() {
   }, []);
 
   function handleChange(event) {
-    console.log(event.target.value);
     setValues(event.target.value);
+
     // event.target.value &&
-    // dispatch(ProjectsActions.setProjectFilter({ category_id: values }));
+    dispatch(ProjectsActions.setProjectFilter({ category_id: values.shift() }));
   }
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <p id="demo-mutiple-checkbox-label">Tag</p>
-        <Select
-          labelId="demo-mutiple-checkbox-label"
-          id="demo-mutiple-checkbox"
-          multiple
-          value={values}
-          onChange={handleChange}
-          input={<Input />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {categories.data
-            && categories.data.map((name) => (
-              <MenuItem key={name.id} value={name.id}>
-                <Checkbox checked={values.indexOf(name.id) > -1} />
-                <ListItemText primary={name.title} />
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
+      <p id="Categories">Tag</p>
+      {categories.data.map((cat) => (
+        <CrossoutCheckbox
+          key={cat.id}
+          text={cat.title}
+          valueOption={cat.id}
+          checked={false}
+        />
+      ))}
     </div>
   );
 }

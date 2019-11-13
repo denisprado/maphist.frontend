@@ -31,10 +31,7 @@ export const INITIAL_STATE = Immutable({
 
 /* Reducers */
 
-export const getSuccess = (state, { data }) => {
-  console.log(data);
-  return state.merge({ data });
-};
+export const getSuccess = (state, { data }) => state.merge({ data });
 export const deleteSuccess = (state, { id }) => {
   localStorage.removeItem('@maphist:category');
 
@@ -55,7 +52,8 @@ export const updateCategory = (state, { category }) => {
 export const logout = (state) => state.merge({ signedIn: false, token: null });
 export const openModal = (state) => state.merge({ categoryModalOpen: true });
 export const closeModal = (state) => state.merge({ categoryModalOpen: false });
-export const createSuccess = (state, { category }) => state.merge({ data: [...state.data, category] });
+export const createSuccess = (state, { category }) =>
+  state.merge({ data: [...state.data, category] });
 
 /* Reducers to types */
 
