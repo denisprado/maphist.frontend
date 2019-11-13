@@ -5,7 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CategoriesActions from '../../../store/ducks/categories';
 import ProjectsActions from '../../../store/ducks/projects';
@@ -37,18 +37,18 @@ export default function CheckBoxCategories() {
   const { filter } = useSelector((state) => state.projects);
   const dispatch = useDispatch();
 
+  const [values, setValues] = useState([]);
+
   useEffect(() => {
     dispatch(CategoriesActions.getCategoriesRequest());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleChange(event) {
-    return (
-      event.target.value
-      && dispatch(
-        ProjectsActions.setProjectFilter({ category_id: event.target.value }),
-      )
-    );
+    console.log(event.target.value);
+    setValues(event.target.value);
+    // event.target.value &&
+    // dispatch(ProjectsActions.setProjectFilter({ category_id: values }));
   }
 
   return (
@@ -59,7 +59,7 @@ export default function CheckBoxCategories() {
           labelId="demo-mutiple-checkbox-label"
           id="demo-mutiple-checkbox"
           multiple
-          value={filter.category_id}
+          value={values}
           onChange={handleChange}
           input={<Input />}
           renderValue={(selected) => selected.join(', ')}
@@ -68,7 +68,7 @@ export default function CheckBoxCategories() {
           {categories.data
             && categories.data.map((name) => (
               <MenuItem key={name.id} value={name.id}>
-                <Checkbox checked={filter.category_id.indexOf(name.id) > -1} />
+                <Checkbox checked={values.indexOf(name.id) > -1} />
                 <ListItemText primary={name.title} />
               </MenuItem>
             ))}
