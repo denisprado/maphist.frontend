@@ -20,7 +20,7 @@ const { Types, Creators } = createActions({
     'lng',
     'startYear',
     'endYear',
-    'category_id',
+    'categoryId',
   ],
   createProjectSuccess: ['project'],
   deleteProjectRequest: ['project'],
@@ -39,7 +39,7 @@ export const INITIAL_STATE = Immutable({
   projectModalOpen: false,
   project: null,
   mapView: false,
-  filter: { date: [1700, 2019], category_id: [1, 2] },
+  filter: { date: [1700, 2019], categoriesIds: [1, 2, 3] },
 });
 
 /* Reducers */

@@ -24,6 +24,7 @@ export function* createProject({
   lng,
   startYear,
   endYear,
+  categoryId,
 }) {
   try {
     const response = yield call(api.post, 'projects', {
@@ -33,6 +34,7 @@ export function* createProject({
       lng,
       start_year: startYear,
       end_year: endYear,
+      category_id: categoryId,
     });
     yield put(ProjectsActions.createProjectSuccess(response.data));
     yield put(ProjectsActions.closeProjectModal());
